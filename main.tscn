@@ -1,0 +1,158 @@
+[gd_scene load_steps=18 format=3 uid="uid://jcflgwwwn1le"]
+
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="1_2e6lc"]
+[ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="1_nlt3c"]
+[ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemy.tscn" id="2_ebo8w"]
+[ext_resource type="Script" path="res://EnemySpawner.gd" id="3_6h5fq"]
+[ext_resource type="Script" path="res://SignalBus.gd" id="4_07qgm"]
+[ext_resource type="Script" path="res://UI.gd" id="5_vcmg0"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_u5wcs"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ltofi"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_tk6ea"]
+sky_material = SubResource("ProceduralSkyMaterial_ltofi")
+
+[sub_resource type="Environment" id="Environment_73ap4"]
+background_mode = 2
+sky = SubResource("Sky_tk6ea")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ufw0k"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_glq8m"]
+noise = SubResource("FastNoiseLite_ufw0k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnowy"]
+albedo_color = Color(0.219608, 0.219608, 0.219608, 1)
+albedo_texture = SubResource("NoiseTexture2D_glq8m")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aeau0"]
+size = Vector2(100, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v6tgy"]
+data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ije44"]
+size = Vector3(1, 10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgyxo"]
+size = Vector3(1, 10, 10)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_73ap4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0.0255684, 42.3907, 86.993)
+shadow_enabled = true
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.999982, 0, 0, 0, 0.242525, 0.970095, 0, -0.970099, 0.242524, 0, 12, 3)
+
+[node name="PhantomCameraHost" type="Node" parent="MainCamera"]
+script = ExtResource("8_u5wcs")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+collision_layer = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+material_override = SubResource("StandardMaterial3D_bnowy")
+mesh = SubResource("PlaneMesh_aeau0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("ConcavePolygonShape3D_v6tgy")
+
+[node name="Player" parent="." instance=ExtResource("1_nlt3c")]
+
+[node name="PhantomCamera3D" type="Node3D" parent="Player"]
+transform = Transform3D(0.999982, 0, 0, 0, 0.242525, 0.970095, 0, -0.970099, 0.242524, 0, 12, 3)
+script = ExtResource("1_2e6lc")
+priority_override = false
+priority = 0
+follow_mode = 2
+follow_target = NodePath("..")
+follow_parameters/target_offset = Vector3(0, 12, 3)
+follow_parameters/damping = true
+follow_parameters/damping_value = 5.567
+look_at_mode = 2
+look_at_target = NodePath("..")
+look_at_parameters/look_at_target_offset = Vector3(0, 0, 0)
+tween_parameters = null
+tween_on_load = false
+inactive_update_mode = 0
+camera_3D_resource = null
+
+[node name="EnemySpawner" type="Node3D" parent="."]
+script = ExtResource("3_6h5fq")
+enemy = ExtResource("2_ebo8w")
+
+[node name="Timer" type="Timer" parent="EnemySpawner"]
+wait_time = 0.125
+autostart = true
+
+[node name="SignalBus" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_07qgm")
+
+[node name="UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+script = ExtResource("5_vcmg0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Kills" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Kills: 0"
+
+[node name="Alive" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Kills: 0"
+
+[node name="Total" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Total: 0"
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Wall" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
+collision_layer = 12
+collision_mask = 12
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_ije44")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("BoxShape3D_lgyxo")
+
+[node name="Wall2" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, 0)
+collision_layer = 4
+collision_mask = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_ije44")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("BoxShape3D_lgyxo")
+
+[connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]
+[connection signal="enemy_died" from="SignalBus" to="Player" method="_on_signal_bus_enemy_died"]
+[connection signal="enemy_died" from="SignalBus" to="UI" method="_on_signal_bus_enemy_died"]
+[connection signal="enemy_spawned" from="SignalBus" to="UI" method="_on_signal_bus_enemy_spawned"]

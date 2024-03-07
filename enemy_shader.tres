@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dsqbuxvv5ubi5"]
+
+[ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="1_6i3it"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tc0cw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_exa3e"]
+noise = SubResource("FastNoiseLite_tc0cw")
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_6i3it")
+shader_parameter/start_color = Color(0, 1, 0, 1)
+shader_parameter/end_color = Color(1, 0, 0, 1)
+shader_parameter/mix_amount = 0.0
+shader_parameter/dissolve_height = 1.0
+shader_parameter/noise_scale = 0.5
+shader_parameter/time_scale = 0.0
+shader_parameter/glow_color = Color(0, 9.375, 7.813, 1)
+shader_parameter/glow_thickness = 0.05
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_exa3e")
