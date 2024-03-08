@@ -47,12 +47,8 @@ size = Vector3(1, 10, 10)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_73ap4")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0.0255684, 42.3907, 86.993)
-shadow_enabled = true
-
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(0.999982, 0, 0, 0, 0.242525, 0.970095, 0, -0.970099, 0.242524, 0, 12, 3)
+transform = Transform3D(1, 0, 0, 0, 0.447214, 0.894427, 0, -0.894427, 0.447214, 0, 12, 6)
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera"]
 script = ExtResource("8_u5wcs")
@@ -69,30 +65,16 @@ shape = SubResource("ConcavePolygonShape3D_v6tgy")
 
 [node name="Player" parent="." instance=ExtResource("1_nlt3c")]
 
-[node name="PhantomCamera3D" type="Node3D" parent="Player"]
-transform = Transform3D(0.999982, 0, 0, 0, 0.242525, 0.970095, 0, -0.970099, 0.242524, 0, 12, 3)
-script = ExtResource("1_2e6lc")
-priority_override = false
-priority = 0
-follow_mode = 2
-follow_target = NodePath("..")
-follow_parameters/target_offset = Vector3(0, 12, 3)
-follow_parameters/damping = true
-follow_parameters/damping_value = 5.567
-look_at_mode = 2
-look_at_target = NodePath("..")
-look_at_parameters/look_at_target_offset = Vector3(0, 0, 0)
-tween_parameters = null
-tween_on_load = false
-inactive_update_mode = 0
-camera_3D_resource = null
+[node name="OmniLight3D" type="OmniLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.30358, 0)
 
 [node name="EnemySpawner" type="Node3D" parent="."]
 script = ExtResource("3_6h5fq")
 enemy = ExtResource("2_ebo8w")
+max_count = 200
 
 [node name="Timer" type="Timer" parent="EnemySpawner"]
-wait_time = 0.125
+wait_time = 0.05
 autostart = true
 
 [node name="SignalBus" type="Node3D" parent="."]
@@ -152,7 +134,26 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 shape = SubResource("BoxShape3D_lgyxo")
 
+[node name="PhantomCamera3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.447214, 0.894427, 0, -0.894427, 0.447214, 0, 12, 6)
+script = ExtResource("1_2e6lc")
+priority_override = false
+priority = 0
+follow_mode = 2
+follow_target = NodePath("../Player")
+follow_parameters/target_offset = Vector3(0, 12, 6)
+follow_parameters/damping = false
+look_at_mode = 2
+look_at_target = NodePath("../Player")
+look_at_parameters/look_at_target_offset = Vector3(0, 0, 0)
+tween_parameters = null
+tween_on_load = false
+inactive_update_mode = 0
+camera_3D_resource = null
+
 [connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]
 [connection signal="enemy_died" from="SignalBus" to="Player" method="_on_signal_bus_enemy_died"]
+[connection signal="enemy_died" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_died" from="SignalBus" to="UI" method="_on_signal_bus_enemy_died"]
+[connection signal="enemy_spawned" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_spawned"]
 [connection signal="enemy_spawned" from="SignalBus" to="UI" method="_on_signal_bus_enemy_spawned"]

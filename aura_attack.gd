@@ -1,7 +1,7 @@
 extends Node3D
 class_name AuraAttack
 
-@export var damage := 100
+@export var damage := 10
 @export var size := 5.0 :
 	set(value):
 		size = value
