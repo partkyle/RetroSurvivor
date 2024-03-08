@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=21 format=3 uid="uid://jcflgwwwn1le"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="1_2e6lc"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="1_nlt3c"]
 [ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemy.tscn" id="2_ebo8w"]
 [ext_resource type="Script" path="res://EnemySpawner.gd" id="3_6h5fq"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="4_07qgm"]
+[ext_resource type="Script" path="res://xp_spawner.gd" id="5_ex7yd"]
 [ext_resource type="Script" path="res://UI.gd" id="5_vcmg0"]
+[ext_resource type="PackedScene" uid="uid://5vtvxlilkwxa" path="res://xp.tscn" id="6_s8bsw"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_u5wcs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ltofi"]
@@ -35,6 +37,9 @@ size = Vector2(100, 100)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v6tgy"]
 data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riw0p"]
+bg_color = Color(0.0470588, 0.6, 0.839216, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ije44"]
 size = Vector3(1, 10, 10)
@@ -66,7 +71,7 @@ shape = SubResource("ConcavePolygonShape3D_v6tgy")
 [node name="Player" parent="." instance=ExtResource("1_nlt3c")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.30358, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 
 [node name="EnemySpawner" type="Node3D" parent="."]
 script = ExtResource("3_6h5fq")
@@ -76,6 +81,10 @@ max_count = 200
 [node name="Timer" type="Timer" parent="EnemySpawner"]
 wait_time = 0.05
 autostart = true
+
+[node name="XpSpawner" type="Node3D" parent="."]
+script = ExtResource("5_ex7yd")
+xp = ExtResource("6_s8bsw")
 
 [node name="SignalBus" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -103,6 +112,53 @@ text = "Kills: 0"
 [node name="Total" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
 text = "Total: 0"
+
+[node name="Xp" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Total: 0"
+
+[node name="Xp" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Progress" type="HBoxContainer" parent="UI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Progress"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+color = Color(0.0470588, 0.6, 0.839216, 1)
+
+[node name="Level" type="Label" parent="UI/Progress/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -11.5
+offset_right = 5.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "1
+"
+
+[node name="XpBar" type="ProgressBar" parent="UI/Progress"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_riw0p")
+show_percentage = false
 
 [node name="Environment" type="Node" parent="."]
 
@@ -151,9 +207,13 @@ tween_on_load = false
 inactive_update_mode = 0
 camera_3D_resource = null
 
+[connection signal="level_up" from="Player" to="UI" method="_on_player_level_up"]
+[connection signal="xp_updated" from="Player" to="UI" method="_on_player_xp_updated"]
 [connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]
 [connection signal="enemy_died" from="SignalBus" to="Player" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_died" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_died"]
+[connection signal="enemy_died" from="SignalBus" to="XpSpawner" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_died" from="SignalBus" to="UI" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_spawned" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_spawned"]
 [connection signal="enemy_spawned" from="SignalBus" to="UI" method="_on_signal_bus_enemy_spawned"]
+[connection signal="gain_xp" from="SignalBus" to="Player" method="_on_signal_bus_gain_xp"]

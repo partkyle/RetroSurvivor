@@ -73,3 +73,11 @@ shape = SubResource("CylinderShape3D_7j2tb")
 
 [node name="Timer" type="Timer" parent="Attacks/Aura"]
 one_shot = true
+
+[node name="Pickup" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup"]
+
+[connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]
