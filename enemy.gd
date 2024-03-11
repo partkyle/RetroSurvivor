@@ -14,7 +14,6 @@ var max_health := 30
 var health := max_health :
 	set(value):
 		health = value
-		mesh.material_override.set_shader_parameter('mix_amount', 1.0-float(health)/float(max_health))
 		health_bar.set_health_percent(float(health)/float(max_health))
 
 
