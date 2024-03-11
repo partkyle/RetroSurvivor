@@ -1,0 +1,16 @@
+- [x] player
+- [x] enemy
+- [x] enemy health
+- [x] enemy death
+- [x] spawing xp
+- [x] leveling
+- [ ] leveling powerup choices
+- [ ] more enemies with more xp
+- [ ] xp scaling ??
+- [ ] player needs to take damage
+- [ ] phases based on enemies killed (xp that is available, but not collected? kills?)
+- [ ] bosses
+- [ ] other attack types
+	- [ ] cones based on looking direction
+	- [ ] projectiles
+	- [ ] proximity laser

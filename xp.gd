@@ -20,6 +20,3 @@ func _process(delta):
 
 func pickup(t: Node3D):
 	target = t
-
-func move_toward(origin: Vector3):
-	transform.origin = origin

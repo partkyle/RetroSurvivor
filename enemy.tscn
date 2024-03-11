@@ -18,7 +18,7 @@ shader_parameter/healthy_color = Color(0, 1, 0, 1)
 shader_parameter/injured_color = Color(1, 0, 0, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_3dr3f"]
-size = Vector2(1, 0.1)
+size = Vector2(0.1, 0.01)
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 6
@@ -40,4 +40,5 @@ script = ExtResource("3_o40gu")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HealthBar"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 material_override = SubResource("ShaderMaterial_6jkei")
+cast_shadow = 0
 mesh = SubResource("QuadMesh_3dr3f")

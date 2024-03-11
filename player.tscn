@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://p0nwwoiajish"]
+[gd_scene load_steps=13 format=3 uid="uid://p0nwwoiajish"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_j4niv"]
 [ext_resource type="Script" path="res://aura_attack.gd" id="2_fagvc"]
@@ -21,8 +21,8 @@ noise = SubResource("FastNoiseLite_qr628")
 render_priority = 0
 shader = ExtResource("3_y2jjf")
 shader_parameter/base_color = Color(0, 1, 1, 1)
-shader_parameter/dissolve_height = 0.75
-shader_parameter/noise_scale = 1.0
+shader_parameter/dissolve_height = 0.7
+shader_parameter/noise_scale = 0.6
 shader_parameter/time_scale = 0.2
 shader_parameter/glow_color = Color(100, 0, 30.209, 1)
 shader_parameter/glow_thickness = 0.05
@@ -37,6 +37,8 @@ cap_bottom = false
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7j2tb"]
 height = 100.0
 radius = 5.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tp46d"]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 9
@@ -79,5 +81,6 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup"]
+shape = SubResource("CylinderShape3D_tp46d")
 
 [connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]

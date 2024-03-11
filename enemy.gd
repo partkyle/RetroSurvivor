@@ -36,9 +36,9 @@ func _physics_process(delta):
 		var direction := transform.basis * (target.transform.origin - transform.origin)
 		if direction.length() > EPISLON:
 			velocity = Vector3(direction.x, 0.0, direction.z).normalized() * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0.0, SPEED)
-			velocity.y = move_toward(velocity.y, 0.0, SPEED)
+	else:
+		velocity.x = move_toward(velocity.x, 0.0, SPEED)
+		velocity.y = move_toward(velocity.y, 0.0, SPEED)
 	move_and_slide()
 
 
@@ -48,8 +48,8 @@ func set_signal_bus(bus: SignalBus):
 func die():
 	collider.queue_free()
 	health_bar.queue_free()
-	signal_bus.enemy_died.emit(self)
 	target = null
+	signal_bus.enemy_died.emit(self)
 	create_tween().set_ease(Tween.EASE_OUT).tween_method(set_dissolve_height, 1.0, 0.0, 1.2).connect('finished', func() : queue_free())
 
 func set_dissolve_height(height: float):

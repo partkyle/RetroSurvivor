@@ -1,12 +1,11 @@
 extends Node3D
 
 @export var enemy : PackedScene
-@export var spawn_area_x := Vector2(-10, 10)
-@export var spawn_area_y := Vector2(-10, 10)
 @export var spawn_radius := Vector2(4, 10)
 @export var max_count := 25
 
 @onready var player = $"../Player"
+@onready var signal_bus := %SignalBus
 
 var total := 0
 
@@ -15,7 +14,7 @@ func spawn_enemy():
 	new_enemy.transform.origin = player.transform.origin + random_direction() * randf_range(spawn_radius.x, spawn_radius.y)
 	add_child(new_enemy)
 	%SignalBus.enemy_spawned.emit(new_enemy)
-	new_enemy.set_signal_bus(%SignalBus)
+	new_enemy.set_signal_bus(signal_bus)
 	new_enemy.target = player
 
 func _on_timer_timeout():
