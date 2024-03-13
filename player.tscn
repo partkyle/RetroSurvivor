@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://p0nwwoiajish"]
+[gd_scene load_steps=14 format=3 uid="uid://p0nwwoiajish"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_j4niv"]
 [ext_resource type="Script" path="res://aura_attack.gd" id="2_fagvc"]
 [ext_resource type="Shader" path="res://shaders/dissolve_no_cull.gdshader" id="3_y2jjf"]
+[ext_resource type="Script" path="res://components/stats_component.gd" id="4_2i3uy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_myua3"]
 albedo_color = Color(0, 1, 1, 1)
@@ -82,5 +83,8 @@ collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup"]
 shape = SubResource("CylinderShape3D_tp46d")
+
+[node name="StatsComponent" type="Node3D" parent="."]
+script = ExtResource("4_2i3uy")
 
 [connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]

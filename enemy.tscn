@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://catxiq3pmdnu3"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_fpeth"]
-[ext_resource type="Material" uid="uid://dsqbuxvv5ubi5" path="res://enemy_shader.tres" id="2_g8d63"]
+[ext_resource type="Material" uid="uid://dsqbuxvv5ubi5" path="res://shaders/enemy_shader.tres" id="2_qj4md"]
 [ext_resource type="Script" path="res://HealthBar.gd" id="3_o40gu"]
 [ext_resource type="Shader" path="res://shaders/healthbar.gdshader" id="4_p6ens"]
 
@@ -27,7 +27,7 @@ script = ExtResource("1_fpeth")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-material_override = ExtResource("2_g8d63")
+material_override = ExtResource("2_qj4md")
 mesh = SubResource("PrismMesh_ojv4n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -35,10 +35,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_d5r3c")
 
 [node name="HealthBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 script = ExtResource("3_o40gu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HealthBar"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 material_override = SubResource("ShaderMaterial_6jkei")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_3dr3f")

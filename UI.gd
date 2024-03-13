@@ -34,6 +34,11 @@ var current_xp := 0 :
 		current_xp = value
 		xp_bar.value = value
 
+var xp_to_next_level := 0 :
+	set(value):
+		xp_to_next_level = value
+		xp_bar.max_value = xp_to_next_level
+
 var level := 0 :
 	set(value):
 		level = value
@@ -49,10 +54,10 @@ func _on_signal_bus_enemy_spawned(enemy):
 	alive += 1
 	total += 1
 
-func _on_player_xp_updated(total_xp):
-	xp = total_xp
-
-
-func _on_player_level_up(_level, _xp):
+func _on_player_level_up(_level):
 	level = _level
+
+func _on_player_gain_xp(_xp, _xp_to_next_level):
+	xp += _xp
 	current_xp = _xp
+	xp_to_next_level = _xp_to_next_level

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=22 format=3 uid="uid://jcflgwwwn1le"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="1_2e6lc"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="1_nlt3c"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://UI.gd" id="5_vcmg0"]
 [ext_resource type="PackedScene" uid="uid://5vtvxlilkwxa" path="res://xp.tscn" id="6_s8bsw"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_u5wcs"]
+[ext_resource type="PackedScene" uid="uid://becxdpu3rdald" path="res://upgrade_select.tscn" id="10_xiwc7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ltofi"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,14 +39,14 @@ size = Vector2(100, 100)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v6tgy"]
 data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riw0p"]
-bg_color = Color(0.0470588, 0.6, 0.839216, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_ije44"]
 size = Vector3(1, 10, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lgyxo"]
 size = Vector3(1, 10, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riw0p"]
+bg_color = Color(0.0470588, 0.6, 0.839216, 1)
 
 [node name="Main" type="Node3D"]
 
@@ -86,20 +87,48 @@ autostart = true
 script = ExtResource("5_ex7yd")
 xp = ExtResource("6_s8bsw")
 
+[node name="Environment" type="Node" parent="."]
+
+[node name="Wall" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
+collision_layer = 12
+collision_mask = 12
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_ije44")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("BoxShape3D_lgyxo")
+
+[node name="Wall2" type="StaticBody3D" parent="Environment"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, 0)
+collision_layer = 4
+collision_mask = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_ije44")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("BoxShape3D_lgyxo")
+
 [node name="SignalBus" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_07qgm")
 
 [node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
 follow_viewport_enabled = true
 script = ExtResource("5_vcmg0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 57.0
+offset_bottom = 104.0
 
 [node name="Kills" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
@@ -160,35 +189,10 @@ size_flags_vertical = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_riw0p")
 show_percentage = false
 
-[node name="Environment" type="Node" parent="."]
-
-[node name="Wall" type="StaticBody3D" parent="Environment"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
-collision_layer = 12
-collision_mask = 12
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-mesh = SubResource("BoxMesh_ije44")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-shape = SubResource("BoxShape3D_lgyxo")
-
-[node name="Wall2" type="StaticBody3D" parent="Environment"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, 0)
-collision_layer = 4
-collision_mask = 4
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-mesh = SubResource("BoxMesh_ije44")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-shape = SubResource("BoxShape3D_lgyxo")
+[node name="UpgradeSelect" parent="." instance=ExtResource("10_xiwc7")]
+process_mode = 3
+visible = false
+offset_right = -0.00012207
 
 [node name="PhantomCamera3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.447214, 0.894427, 0, -0.894427, 0.447214, 0, 12, 6)
@@ -207,8 +211,9 @@ tween_on_load = false
 inactive_update_mode = 0
 camera_3D_resource = null
 
+[connection signal="gain_xp" from="Player" to="UI" method="_on_player_gain_xp"]
 [connection signal="level_up" from="Player" to="UI" method="_on_player_level_up"]
-[connection signal="xp_updated" from="Player" to="UI" method="_on_player_xp_updated"]
+[connection signal="level_up" from="Player" to="UpgradeSelect" method="_on_player_level_up"]
 [connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]
 [connection signal="enemy_died" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_died" from="SignalBus" to="XpSpawner" method="_on_signal_bus_enemy_died"]
@@ -216,3 +221,5 @@ camera_3D_resource = null
 [connection signal="enemy_spawned" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_spawned"]
 [connection signal="enemy_spawned" from="SignalBus" to="UI" method="_on_signal_bus_enemy_spawned"]
 [connection signal="gain_xp" from="SignalBus" to="Player" method="_on_signal_bus_gain_xp"]
+[connection signal="pause_game" from="SignalBus" to="SignalBus" method="_on_pause_game"]
+[connection signal="unpause_game" from="SignalBus" to="SignalBus" method="_on_unpause_game"]

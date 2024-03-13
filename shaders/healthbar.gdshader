@@ -1,5 +1,4 @@
 shader_type spatial;
-render_mode depth_draw_opaque;
 
 uniform float health_percent : hint_range(0.0, 1.0, 0.01) = 1.0;
 
@@ -16,6 +15,8 @@ void vertex() {
     );
 
     MODELVIEW_MATRIX = modified_model_view;
+	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+
 	if (PROJECTION_MATRIX[3][3] != 0.0) {
 		float h = abs(1.0 / (2.0 * PROJECTION_MATRIX[1][1]));
 		float sc = (h * 2.0); //consistent with Y-fov
