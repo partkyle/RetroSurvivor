@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://becxdpu3rdald"]
+
+[ext_resource type="Script" path="res://upgrade_select.gd" id="1_aw5gr"]
+[ext_resource type="PackedScene" uid="uid://j74ogr2tqp7c" path="res://choice.tscn" id="2_v7xlp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5v5hd"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u78ng"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yryy1"]
+bg_color = Color(0.192157, 0.192157, 0.192157, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="UpgradeSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aw5gr")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 200
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Choice1" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_v7xlp")]
+layout_mode = 2
+stylebox = SubResource("StyleBoxFlat_5v5hd")
+
+[node name="Choice2" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_v7xlp")]
+layout_mode = 2
+stylebox = SubResource("StyleBoxFlat_u78ng")
+
+[node name="Choice3" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_v7xlp")]
+layout_mode = 2
+stylebox = SubResource("StyleBoxFlat_yryy1")
+
+[connection signal="select_powerup" from="." to="." method="_on_select_powerup"]

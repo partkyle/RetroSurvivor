@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://dmticccf3b4mu"]
+
+[ext_resource type="Script" path="res://resources/powerups/powerup.gd" id="1_8n0qp"]
+
+[resource]
+script = ExtResource("1_8n0qp")
+name = "Attack Range"
+stat = 2
+description = "Increases the area of effect of attacks by %.02f"
+rarity_scaling = {
+0: 0.1,
+1: 0.2,
+2: 0.3,
+3: 0.5
+}

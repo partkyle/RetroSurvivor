@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var alive_label := $VBoxContainer/Alive
 @onready var total_label := $VBoxContainer/Total
 @onready var xp_label := $VBoxContainer/Xp
+@onready var stats_label := $VBoxContainer/Stats
 
 @onready var level_label := $Progress/ColorRect/Level
 @onready var xp_bar := $Progress/XpBar
@@ -44,6 +45,10 @@ var level := 0 :
 		level = value
 		level_label.text = '%d' % [level]
 
+var stats := "" :
+	set(value):
+		stats = value
+		stats_label.text = value
 
 func _on_signal_bus_enemy_died(enemy):
 	kills += 1
@@ -61,3 +66,6 @@ func _on_player_gain_xp(_xp, _xp_to_next_level):
 	xp += _xp
 	current_xp = _xp
 	xp_to_next_level = _xp_to_next_level
+
+func _on_signal_bus_stats_updated(_stats):
+	stats = _stats

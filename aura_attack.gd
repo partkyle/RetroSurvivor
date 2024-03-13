@@ -12,11 +12,13 @@ class_name AuraAttack
 @onready var timer := $Timer
 @onready var area := $Area3D
 
+@onready var stats := $"../../StatsComponent"
+
 
 func _ready():
-	# ensure this gets done
 	set_size(size)
 
+# sync the collider and the mesh to the same size
 func set_size(size: float):
 	if mesh and collider:
 		mesh.mesh.top_radius = size
@@ -29,16 +31,9 @@ func _physics_process(delta):
 
 		for body in bodies:
 			if body.has_method('take_damage'):
-				body.take_damage(damage)
+				body.take_damage(calc_damage())
 
 		timer.start()
 
-
-func upgrade():
-	return
-	if damage < 1000:
-		damage *= 1.1
-	timer.wait_time *= 0.9
-	area.scale += Vector3(0.005, 0.0, 0.005)
-	print('damage increased to %d' % [damage])
-
+func calc_damage():
+	return damage * (1.0 + stats.attack_damage_buff)

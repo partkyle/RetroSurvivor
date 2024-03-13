@@ -4,9 +4,11 @@
 - [x] enemy death
 - [x] spawing xp
 - [x] leveling
-- [ ] leveling powerup choices
+- [x] leveling powerup choices
+- [x] xp scaling ??
+- [ ] render attacks on aura somehow
+- [ ] attack speed increase
 - [ ] more enemies with more xp
-- [ ] xp scaling ??
 - [ ] player needs to take damage
 - [ ] phases based on enemies killed (xp that is available, but not collected? kills?)
 - [ ] bosses

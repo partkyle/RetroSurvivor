@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://b8dxnhsqnei88"]
+
+[ext_resource type="Script" path="res://resources/powerups/powerup.gd" id="1_5nkjv"]
+
+[resource]
+script = ExtResource("1_5nkjv")
+name = "Damage"
+stat = 3
+description = "Increase damage dealt by %.02f"
+rarity_scaling = {
+0: 0.1,
+1: 0.25,
+2: 0.5,
+3: 1.0
+}

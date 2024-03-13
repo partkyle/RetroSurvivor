@@ -6,6 +6,7 @@ signal enemy_spawned(enemy: Enemy)
 signal gain_xp(value: int)
 signal pause_game()
 signal unpause_game()
+signal stats_updated(stats: String)
 
 
 func _on_pause_game():
