@@ -20,6 +20,7 @@ const RARITY_TO_COLOR = {
 	Rarity.EPIC: null,
 	Rarity.LEGENDARY: null,
 }
+@export var icon : Texture2D
 
 func get_description(rarity: Rarity) -> String:
-	return description % [rarity_scaling[rarity]]
+	return description % [int(rarity_scaling[rarity] * 100)]

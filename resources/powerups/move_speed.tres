@@ -1,15 +1,22 @@
-[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://bcg8h5axbiqw"]
+[gd_resource type="Resource" script_class="PowerUp" load_steps=4 format=3 uid="uid://bcg8h5axbiqw"]
 
+[ext_resource type="Texture2D" uid="uid://dryojk6brxwgb" path="res://assets/icons.png" id="1_jndrq"]
 [ext_resource type="Script" path="res://resources/powerups/powerup.gd" id="1_niapa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8lab"]
+atlas = ExtResource("1_jndrq")
+region = Rect2(0, 0, 32, 32)
+filter_clip = true
 
 [resource]
 script = ExtResource("1_niapa")
 name = "Move Speed"
 stat = 0
-description = "Increases the player move speed by %.02f"
+description = "Increases the player move speed by %d%%"
 rarity_scaling = {
 0: 0.1,
 1: 0.25,
 2: 0.5,
 3: 1.0
 }
+icon = SubResource("AtlasTexture_j8lab")

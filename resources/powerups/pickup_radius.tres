@@ -1,15 +1,22 @@
-[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://drec0q66v6eb7"]
+[gd_resource type="Resource" script_class="PowerUp" load_steps=4 format=3 uid="uid://drec0q66v6eb7"]
 
+[ext_resource type="Texture2D" uid="uid://dryojk6brxwgb" path="res://assets/icons.png" id="1_3s1rl"]
 [ext_resource type="Script" path="res://resources/powerups/powerup.gd" id="1_po2gx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbvuh"]
+atlas = ExtResource("1_3s1rl")
+region = Rect2(96, 0, 32, 32)
+filter_clip = true
 
 [resource]
 script = ExtResource("1_po2gx")
 name = "Pickup Radius"
 stat = 4
-description = "Increase xp pickup radius by %.02f"
+description = "Increase xp pickup radius by %d%%"
 rarity_scaling = {
 0: 0.1,
 1: 0.25,
 2: 0.5,
 3: 0.8
 }
+icon = SubResource("AtlasTexture_pbvuh")

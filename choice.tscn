@@ -25,14 +25,28 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -67.0
+offset_left = -70.0
 offset_top = 40.0
-offset_right = 67.0
+offset_right = 64.0
 offset_bottom = 63.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 text = "label text"
 horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -214.0
+offset_right = 68.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
 layout_mode = 1
@@ -41,14 +55,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -105.5
-offset_top = -50.0
-offset_right = 105.5
-offset_bottom = 50.0
+offset_left = -110.0
+offset_top = 35.0
+offset_right = 101.0
+offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+mouse_filter = 1
 text = "description in here"
-context_menu_enabled = true
+scroll_active = false
+drag_and_drop_selection_enabled = false
 
 [connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]

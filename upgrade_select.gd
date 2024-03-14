@@ -18,6 +18,7 @@ func _ready():
 	# set up a reference to this parent so we can send signals back
 	for c in ui_choices:
 		c.set_control_parent(self)
+	setup_choices()
 
 
 var previous_level := 1

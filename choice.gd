@@ -4,6 +4,7 @@ extends Node
 @onready var panel := $Panel
 @onready var label := $Panel/Label
 @onready var text := $Panel/RichTextLabel
+@onready var icon := $Panel/Icon
 
 @export var stylebox : StyleBox
 
@@ -21,6 +22,8 @@ func set_control_parent(parent: Node):
 func set_powerup(powerup: PowerUp, rarity: PowerUp.Rarity):
 	_powerup = powerup
 	_rarity = rarity
+	icon.texture = powerup.icon
+
 	stylebox.border_color = PowerUp.RARITY_TO_COLOR[rarity]
 
 	label.text = powerup.name
@@ -29,5 +32,4 @@ func set_powerup(powerup: PowerUp, rarity: PowerUp.Rarity):
 
 func _on_panel_gui_input(event):
 	if event is InputEventMouseButton:
-		print(event)
 		_control_parent.emit_signal('select_powerup', _powerup, _rarity)

@@ -1,15 +1,22 @@
-[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://dmticccf3b4mu"]
+[gd_resource type="Resource" script_class="PowerUp" load_steps=4 format=3 uid="uid://dmticccf3b4mu"]
 
 [ext_resource type="Script" path="res://resources/powerups/powerup.gd" id="1_8n0qp"]
+[ext_resource type="Texture2D" uid="uid://dryojk6brxwgb" path="res://assets/icons.png" id="1_f5k5m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3abtt"]
+atlas = ExtResource("1_f5k5m")
+region = Rect2(64, 0, 32, 32)
+filter_clip = true
 
 [resource]
 script = ExtResource("1_8n0qp")
 name = "Attack Range"
 stat = 2
-description = "Increases the area of effect of attacks by %.02f"
+description = "Increases the area of effect of attacks by %d%%"
 rarity_scaling = {
 0: 0.1,
 1: 0.2,
 2: 0.3,
 3: 0.5
 }
+icon = SubResource("AtlasTexture_3abtt")
