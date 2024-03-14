@@ -58,13 +58,14 @@ bg_color = Color(0.0470588, 0.6, 0.839216, 1)
 environment = SubResource("Environment_73ap4")
 
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.447214, 0.894427, 0, -0.894427, 0.447214, 0, 12, 6)
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 12, 6)
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera"]
 script = ExtResource("8_u5wcs")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 collision_layer = 0
+metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 material_override = SubResource("StandardMaterial3D_bnowy")
@@ -78,10 +79,11 @@ shape = SubResource("ConcavePolygonShape3D_v6tgy")
 [node name="OmniLight3D" type="OmniLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 
-[node name="EnemySpawner" type="Node3D" parent="."]
+[node name="EnemySpawner" type="Node3D" parent="." node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("3_6h5fq")
 enemy = ExtResource("2_ebo8w")
 max_count = 200
+spawn_point = NodePath("../Player")
 
 [node name="Timer" type="Timer" parent="EnemySpawner"]
 wait_time = 0.05
@@ -202,17 +204,16 @@ offset_right = -0.00012207
 choices = Array[Resource("res://resources/powerups/powerup.gd")]([ExtResource("10_cv01b"), ExtResource("11_qsksk"), ExtResource("12_vuq3h"), ExtResource("13_ydjt0")])
 
 [node name="PhantomCamera3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 6)
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 12, 6)
 script = ExtResource("1_2e6lc")
 priority_override = false
 priority = 0
 follow_mode = 2
 follow_target = NodePath("../Player")
 follow_parameters/target_offset = Vector3(0, 12, 6)
-follow_parameters/damping = false
-look_at_mode = 2
-look_at_target = NodePath("../Player")
-look_at_parameters/look_at_target_offset = Vector3(0, 0, 0)
+follow_parameters/damping = true
+follow_parameters/damping_value = 5.0
+look_at_mode = 0
 tween_parameters = null
 tween_on_load = false
 inactive_update_mode = 0
