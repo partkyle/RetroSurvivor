@@ -22,7 +22,6 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("2_7puwa")
 
 [node name="Label" type="Label" parent="Panel"]
-z_index = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -52,7 +51,6 @@ grow_vertical = 2
 texture = ExtResource("3_pgvwk")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
-z_index = 1
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
