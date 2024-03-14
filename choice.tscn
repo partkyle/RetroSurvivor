@@ -63,7 +63,7 @@ mouse_filter = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "INSERT DESCRIPTION"
+text = "INSERT_DESCRIPTION"
 horizontal_alignment = 1
 
 [connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]
