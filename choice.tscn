@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://j74ogr2tqp7c"]
+[gd_scene load_steps=4 format=3 uid="uid://j74ogr2tqp7c"]
 
 [ext_resource type="Script" path="res://choice.gd" id="1_ip62t"]
 [ext_resource type="StyleBox" uid="uid://thggn2q5idvl" path="res://upgrade_select_panel.tres" id="2_7puwa"]
+[ext_resource type="Texture2D" uid="uid://6jy1584gnol" path="res://icon.svg" id="3_pgvwk"]
 
 [node name="Choice" type="MarginContainer"]
 anchors_preset = 15
@@ -21,6 +22,7 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("2_7puwa")
 
 [node name="Label" type="Label" parent="Panel"]
+z_index = 1
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -41,26 +43,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -214.0
-offset_right = 68.0
-offset_bottom = -86.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("3_pgvwk")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+z_index = 1
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -110.0
-offset_top = 35.0
-offset_right = 101.0
-offset_bottom = 135.0
+anchor_bottom = 1.0
+offset_left = -105.5
+offset_top = -100.0
+offset_right = 105.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 size_flags_horizontal = 4
 mouse_filter = 1
 text = "description in here"

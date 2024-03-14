@@ -202,7 +202,7 @@ offset_right = -0.00012207
 choices = Array[Resource("res://resources/powerups/powerup.gd")]([ExtResource("10_cv01b"), ExtResource("11_qsksk"), ExtResource("12_vuq3h"), ExtResource("13_ydjt0")])
 
 [node name="PhantomCamera3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.447214, 0.894427, 0, -0.894427, 0.447214, 0, 12, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 6)
 script = ExtResource("1_2e6lc")
 priority_override = false
 priority = 0
