@@ -40,13 +40,7 @@ void fragment() {
 
 	// we want to normalize the current_dissolve_height so that we get something
 	// between 0.0 and 1.0. This can cause some floating point issues
-	float current_dissolve_height = 0.0;
-
-	if (dissolve_height < 1.0) {
-		//// Originally I was dividing this by 2.0, but that's before I added in the
-		//// noise_scale variable.
-		current_dissolve_height = (y_pos + noise_at);
-	}
+	float current_dissolve_height = float(dissolve_height < 1.0) * (y_pos + noise_at);
 
 	// always set the base_color
 	ALBEDO = base_color;
