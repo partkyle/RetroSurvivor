@@ -8,8 +8,16 @@
 - [x] xp scaling ??
 - [ ] render attacks on aura somehow
 - [ ] attack speed increase
+- [ ] crit
 - [ ] more enemies with more xp
 - [ ] player needs to take damage
+- [ ] objectives
+- [ ] player takes damage
+	- [ ] health component to share system between enemy and player
+	- [ ] should get damage popups for free
+- [ ] game over screen
+- [ ] levelselect
+	- [ ] rouguelike map ?
 - [ ] phases based on enemies killed (xp that is available, but not collected? kills?)
 - [ ] bosses
 - [ ] other attack types
