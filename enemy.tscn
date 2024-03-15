@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://catxiq3pmdnu3"]
+[gd_scene load_steps=10 format=3 uid="uid://catxiq3pmdnu3"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_fpeth"]
+[ext_resource type="PackedScene" uid="uid://c1j0q4pbd3wsu" path="res://damage_popup.tscn" id="2_5ernr"]
 [ext_resource type="Material" uid="uid://dsqbuxvv5ubi5" path="res://shaders/enemy_shader.tres" id="2_qj4md"]
 [ext_resource type="Script" path="res://HealthBar.gd" id="3_o40gu"]
 [ext_resource type="Shader" path="res://shaders/healthbar.gdshader" id="4_p6ens"]
@@ -24,6 +25,7 @@ size = Vector2(0.1, 0.01)
 collision_layer = 6
 collision_mask = 6
 script = ExtResource("1_fpeth")
+damage_popup = ExtResource("2_5ernr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -42,3 +44,6 @@ script = ExtResource("3_o40gu")
 material_override = SubResource("ShaderMaterial_6jkei")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_3dr3f")
+
+[node name="DamageNotifier" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61665, 0)

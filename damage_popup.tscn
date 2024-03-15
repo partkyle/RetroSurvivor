@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1j0q4pbd3wsu"]
+
+[ext_resource type="Script" path="res://damage_popup.gd" id="1_16gj6"]
+
+[node name="DamagePopup" type="Label3D"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+texture_filter = 0
+text = "11"
+font_size = 128
+outline_size = 6
+script = ExtResource("1_16gj6")

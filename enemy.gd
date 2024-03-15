@@ -1,8 +1,11 @@
-extends CharacterBody3D
 class_name Enemy
+extends CharacterBody3D
 
 const SPEED := 2.0
 const EPISLON := 0.1
+
+@export var damage_popup : PackedScene
+@onready var damage_notifier := $DamageNotifier
 
 @onready var mesh := $MeshInstance3D
 @onready var collider := $CollisionShape3D
@@ -20,9 +23,15 @@ var health := max_health :
 var signal_bus : SignalBus
 
 func take_damage(damage: int):
+	popup_damage(damage)
 	health -= damage
 	if health <= 0:
 		die()
+
+func popup_damage(damage: int):
+	var d := damage_popup.instantiate()
+	d.text = '%d' % damage
+	damage_notifier.add_child(d)
 
 #func _process(delta):
 	#if target:
