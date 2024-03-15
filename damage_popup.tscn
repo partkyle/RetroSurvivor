@@ -6,7 +6,6 @@
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
 billboard = 1
 double_sided = false
-no_depth_test = true
 fixed_size = true
 texture_filter = 0
 text = "11"
