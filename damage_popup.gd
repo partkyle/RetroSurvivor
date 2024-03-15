@@ -3,6 +3,7 @@ extends Label3D
 
 @export var time := randf_range(0.4, 0.6)
 @export var speed := 0.1
+@export var alpha_scaling := 8.0
 
 @onready var direction := random_direction()
 
@@ -14,8 +15,8 @@ func _process(delta):
 	transform.origin += direction*speed*delta
 	scale = scale.lerp(double_scale, delta)
 
-	modulate.a = lerp(modulate.a, 0.0, delta * 10.0)
-	outline_modulate.a = lerp(outline_modulate.a, 0.0, delta * 10.0)
+	modulate.a = lerp(modulate.a, 0.0, delta * alpha_scaling)
+	outline_modulate.a = lerp(outline_modulate.a, 0.0, delta * alpha_scaling)
 
 	acc += delta
 	if acc > time:
