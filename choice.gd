@@ -18,16 +18,18 @@ func _ready():
 func set_control_parent(parent: Node):
 	_control_parent = parent
 
-
 func set_powerup(powerup: PowerUp, rarity: PowerUp.Rarity):
 	_powerup = powerup
 	_rarity = rarity
-	icon.texture = powerup.icon
 
-	stylebox.border_color = PowerUp.RARITY_TO_COLOR[rarity]
+	icon.texture = _powerup.icon
 
-	title.text = powerup.name
-	description.text = powerup.get_description(rarity)
+	var color = PowerUp.RARITY_TO_COLOR[_rarity]
+	icon.self_modulate = color
+	stylebox.border_color = color
+
+	title.text = _powerup.name
+	description.text = _powerup.get_description(rarity)
 
 
 func _on_panel_gui_input(event):
