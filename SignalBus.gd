@@ -8,6 +8,8 @@ signal pause_game()
 signal unpause_game()
 signal stats_updated(stats: String)
 
+signal damage_dealt(event: DamageEvent)
+
 
 func _on_pause_game():
 	get_tree().paused = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=28 format=3 uid="uid://jcflgwwwn1le"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="1_2e6lc"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="1_nlt3c"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" path="res://xp_spawner.gd" id="5_ex7yd"]
 [ext_resource type="Script" path="res://UI.gd" id="5_vcmg0"]
 [ext_resource type="PackedScene" uid="uid://5vtvxlilkwxa" path="res://xp.tscn" id="6_s8bsw"]
+[ext_resource type="Script" path="res://damage_notifier.gd" id="8_awcfw"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_u5wcs"]
+[ext_resource type="PackedScene" uid="uid://c1j0q4pbd3wsu" path="res://damage_popup.tscn" id="9_xsda3"]
 [ext_resource type="Resource" uid="uid://bcg8h5axbiqw" path="res://resources/powerups/move_speed.tres" id="10_cv01b"]
 [ext_resource type="PackedScene" uid="uid://becxdpu3rdald" path="res://upgrade_select.tscn" id="10_xiwc7"]
 [ext_resource type="Resource" uid="uid://dmticccf3b4mu" path="res://resources/powerups/attack_range.tres" id="11_qsksk"]
@@ -127,6 +129,10 @@ shape = SubResource("BoxShape3D_lgyxo")
 unique_name_in_owner = true
 script = ExtResource("4_07qgm")
 
+[node name="DamageNotifier" type="Node3D" parent="."]
+script = ExtResource("8_awcfw")
+damage_popup = ExtResource("9_xsda3")
+
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3
 follow_viewport_enabled = true
@@ -223,6 +229,7 @@ camera_3D_resource = null
 [connection signal="level_up" from="Player" to="UI" method="_on_player_level_up"]
 [connection signal="level_up" from="Player" to="UI/UpgradeSelect" method="_on_player_level_up"]
 [connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]
+[connection signal="damage_dealt" from="SignalBus" to="DamageNotifier" method="_on_signal_bus_damage_dealt"]
 [connection signal="enemy_died" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_died" from="SignalBus" to="XpSpawner" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_died" from="SignalBus" to="UI" method="_on_signal_bus_enemy_died"]

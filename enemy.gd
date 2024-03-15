@@ -4,8 +4,7 @@ extends CharacterBody3D
 const SPEED := 2.0
 const EPISLON := 0.1
 
-@export var damage_popup : PackedScene
-@onready var damage_notifier := $DamageNotifier
+@onready var damage_notifier_position := $DamageNotifierPosition
 
 @onready var mesh := $MeshInstance3D
 @onready var collider := $CollisionShape3D
@@ -29,9 +28,8 @@ func take_damage(damage: int):
 		die()
 
 func popup_damage(damage: int):
-	var d := damage_popup.instantiate()
-	d.text = '%d' % damage
-	damage_notifier.add_child(d)
+	signal_bus.damage_dealt.emit(DamageEvent.create(damage, damage_notifier_position.global_position))
+
 
 #func _process(delta):
 	#if target:
