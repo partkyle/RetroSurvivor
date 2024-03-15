@@ -64,7 +64,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Attacks/Aura/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018, 1, 0.007)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 material_override = SubResource("ShaderMaterial_gw508")
 mesh = SubResource("CylinderMesh_7dvrn")
 skeleton = NodePath("../..")
