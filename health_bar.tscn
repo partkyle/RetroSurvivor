@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyx8vgqy8667j"]
+
+[ext_resource type="Script" path="res://HealthBar.gd" id="1_k5g78"]
+[ext_resource type="Shader" path="res://shaders/healthbar.gdshader" id="2_ce41x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jkei"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_ce41x")
+shader_parameter/fillPercent = 1.0
+shader_parameter/borderSize = 0.1
+shader_parameter/aspectRatio = Vector2(10, 1)
+shader_parameter/healthyColor = Color(0, 0.482353, 0, 1)
+shader_parameter/injuredColor = Color(0.384314, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3dr3f"]
+size = Vector2(0.1, 0.01)
+
+[node name="HealthBar" type="Node3D"]
+script = ExtResource("1_k5g78")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_6jkei")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_3dr3f")

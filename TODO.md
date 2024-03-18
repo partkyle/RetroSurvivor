@@ -6,6 +6,7 @@
 - [x] leveling
 - [x] leveling powerup choices
 - [x] xp scaling ??
+- [x] healthbar border
 - [ ] render attacks on aura somehow
 - [ ] attack speed increase
 - [ ] crit

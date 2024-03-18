@@ -9,4 +9,4 @@ extends Node3D
 		set_health_percent(health_percent)
 
 func set_health_percent(percent: float):
-	mesh.material_override.set_shader_parameter('health_percent', percent)
+	mesh.material_override.set_shader_parameter('fillPercent', percent)
