@@ -4,6 +4,7 @@ class_name Player
 signal level_up(level: int)
 signal gain_xp(xp: int, xp_to_next_level: int)
 signal deal_damage(event: DamageEvent)
+signal death()
 
 var xp := 0
 var level := 1
@@ -12,6 +13,7 @@ var xp_to_next_level := 100
 @onready var stats := $StatsComponent
 @onready var attack_aura : AuraAttack = $Attacks/Aura
 @onready var pickup_collider := $Pickup/CollisionShape3D
+@onready var health_bar := $HealthBar
 
 @export var pickup_radius := 5.0 :
 	set(value):
@@ -79,7 +81,10 @@ func _on_upgrade_select_select_powerup(powerup: PowerUp, rarity: PowerUp.Rarity)
 
 func _on_health_component_health_below_zero():
 	print('player died')
-	queue_free()
+	death.emit()
 
 func _on_aura_deal_damage(event: DamageEvent):
 	deal_damage.emit(event)
+
+func _on_health_component_health_updated(current, total):
+	health_bar.set_health_percent(float(current)/float(total))

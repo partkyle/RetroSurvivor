@@ -62,3 +62,9 @@ func _on_health_component_health_below_zero():
 
 func _on_health_component_health_updated(current, total):
 	health_bar.set_health_percent(float(current)/float(total))
+
+
+func _on_area_3d_body_entered(body):
+	if body is Player:
+		var health : HealthComponent = body.get_node('HealthComponent')
+		health.take_damage(10)

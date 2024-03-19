@@ -15,8 +15,8 @@ var speed := SPEED
 func _process(delta):
 	if target:
 		speed += 0.1
-		transform.origin = transform.origin.move_toward(target.transform.origin, speed * delta)
-		if (target.transform.origin - transform.origin).length() < EPSILON:
+		global_position = global_position.move_toward(target.global_position, speed * delta)
+		if (target.global_position - global_position).length() < EPSILON:
 			signal_bus.gain_xp.emit(value)
 			queue_free()
 

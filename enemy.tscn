@@ -33,9 +33,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42192, 0)
 script = ExtResource("4_t4b1q")
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_gb81q")
 
 [connection signal="health_below_zero" from="HealthComponent" to="." method="_on_health_component_health_below_zero"]
 [connection signal="health_updated" from="HealthComponent" to="." method="_on_health_component_health_updated"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

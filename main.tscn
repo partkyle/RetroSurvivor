@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=29 format=3 uid="uid://jcflgwwwn1le"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="1_2e6lc"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="1_nlt3c"]
@@ -15,6 +15,8 @@
 [ext_resource type="Resource" uid="uid://dmticccf3b4mu" path="res://resources/powerups/attack_range.tres" id="11_qsksk"]
 [ext_resource type="Resource" uid="uid://b8dxnhsqnei88" path="res://resources/powerups/damage.tres" id="12_vuq3h"]
 [ext_resource type="Resource" uid="uid://drec0q66v6eb7" path="res://resources/powerups/pickup_radius.tres" id="13_ydjt0"]
+[ext_resource type="Texture2D" uid="uid://cyqf2lb5ojevj" path="res://assets/ded.png" id="15_feeg5"]
+[ext_resource type="Script" path="res://game_over.gd" id="16_hruf7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ltofi"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -218,6 +220,25 @@ visible = false
 offset_right = -0.00012207
 choices = Array[Resource("res://resources/powerups/powerup.gd")]([ExtResource("10_cv01b"), ExtResource("11_qsksk"), ExtResource("12_vuq3h"), ExtResource("13_ydjt0")])
 
+[node name="GameOver" type="ColorRect" parent="UI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.156863, 0.156863, 0.156863, 0.682353)
+script = ExtResource("16_hruf7")
+
+[node name="ded" type="TextureRect" parent="UI/GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_feeg5")
+
 [node name="PhantomCamera3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 12, 6)
 script = ExtResource("1_2e6lc")
@@ -235,6 +256,7 @@ inactive_update_mode = 0
 camera_3D_resource = null
 
 [connection signal="deal_damage" from="Player" to="DamageNotifier" method="_on_player_deal_damage"]
+[connection signal="death" from="Player" to="UI/GameOver" method="_on_player_death"]
 [connection signal="gain_xp" from="Player" to="UI" method="_on_player_gain_xp"]
 [connection signal="level_up" from="Player" to="UI" method="_on_player_level_up"]
 [connection signal="level_up" from="Player" to="UI/UpgradeSelect" method="_on_player_level_up"]
