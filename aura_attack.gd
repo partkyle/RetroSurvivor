@@ -9,10 +9,12 @@ class_name AuraAttack
 
 @onready var collider := $Area3D/CollisionShape3D
 @onready var mesh := $Area3D/MeshInstance3D
-@onready var timer := $Timer
 @onready var area := $Area3D
 
 @onready var stats := $"../../StatsComponent"
+
+@export var seconds_per_attack := 1.0
+var time_since_last_attack := 0.0
 
 
 func _ready():
@@ -26,14 +28,17 @@ func set_size(size: float):
 		collider.shape.radius = size
 
 func _physics_process(delta):
-	if timer.is_stopped():
-		var bodies = area.get_overlapping_bodies()
+	time_since_last_attack += delta
+	while time_since_last_attack > seconds_per_attack:
+		time_since_last_attack -= seconds_per_attack
+		attack()
 
-		for body in bodies:
-			if body.has_method('take_damage'):
-				body.take_damage(calc_damage())
+func attack():
+	var bodies = area.get_overlapping_bodies()
 
-		timer.start()
+	for body in bodies:
+		if body.has_method('take_damage'):
+			body.take_damage(calc_damage())
 
 func calc_damage():
 	return damage * (1.0 + stats.attack_damage_buff)

@@ -17,6 +17,6 @@ shader_parameter/mix_amount = 0.0
 shader_parameter/dissolve_height = 1.0
 shader_parameter/noise_scale = 0.5
 shader_parameter/time_scale = 0.0
-shader_parameter/glow_color = Color(0, 9.375, 7.813, 1)
+shader_parameter/glow_color = Color(100, 0, 100, 1)
 shader_parameter/glow_thickness = 0.05
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_exa3e")

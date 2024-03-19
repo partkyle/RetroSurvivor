@@ -63,7 +63,6 @@ func _add_xp(value: int):
 	gain_xp.emit(xp, xp_to_next_level)
 
 
-
 func _on_upgrade_select_select_powerup(powerup: PowerUp, rarity: PowerUp.Rarity):
 	match powerup.stat:
 		PowerUp.Stat.MOVE_SPEED:

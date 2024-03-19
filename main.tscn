@@ -87,10 +87,6 @@ enemy = ExtResource("2_ebo8w")
 max_count = 200
 spawn_point = NodePath("../Player")
 
-[node name="Timer" type="Timer" parent="EnemySpawner"]
-wait_time = 0.05
-autostart = true
-
 [node name="XpSpawner" type="Node3D" parent="."]
 script = ExtResource("5_ex7yd")
 xp = ExtResource("6_s8bsw")
@@ -113,8 +109,8 @@ shape = SubResource("BoxShape3D_lgyxo")
 
 [node name="Wall2" type="StaticBody3D" parent="Environment"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, 0)
-collision_layer = 4
-collision_mask = 4
+collision_layer = 12
+collision_mask = 12
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
@@ -228,7 +224,6 @@ camera_3D_resource = null
 [connection signal="gain_xp" from="Player" to="UI" method="_on_player_gain_xp"]
 [connection signal="level_up" from="Player" to="UI" method="_on_player_level_up"]
 [connection signal="level_up" from="Player" to="UI/UpgradeSelect" method="_on_player_level_up"]
-[connection signal="timeout" from="EnemySpawner/Timer" to="EnemySpawner" method="_on_timer_timeout"]
 [connection signal="damage_dealt" from="SignalBus" to="DamageNotifier" method="_on_signal_bus_damage_dealt"]
 [connection signal="enemy_died" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_died" from="SignalBus" to="XpSpawner" method="_on_signal_bus_enemy_died"]
