@@ -1,9 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=27 format=3 uid="uid://jcflgwwwn1le"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="1_2e6lc"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="1_nlt3c"]
-[ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemy.tscn" id="2_ebo8w"]
-[ext_resource type="Script" path="res://EnemySpawner.gd" id="3_6h5fq"]
+[ext_resource type="PackedScene" uid="uid://c16fabcn8ptp" path="res://enemy_spawner_totem.tscn" id="3_pngea"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="4_07qgm"]
 [ext_resource type="Script" path="res://xp_spawner.gd" id="5_ex7yd"]
 [ext_resource type="Script" path="res://UI.gd" id="5_vcmg0"]
@@ -81,11 +80,25 @@ shape = SubResource("ConcavePolygonShape3D_v6tgy")
 [node name="OmniLight3D" type="OmniLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 
-[node name="EnemySpawner" type="Node3D" parent="." node_paths=PackedStringArray("spawn_point")]
-script = ExtResource("3_6h5fq")
-enemy = ExtResource("2_ebo8w")
-max_count = 200
-spawn_point = NodePath("../Player")
+[node name="EnemyParent" type="Node3D" parent="."]
+
+[node name="EnemySpawnerTotem" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("3_pngea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6492, 0, 0)
+player = NodePath("../Player")
+signal_bus = NodePath("../SignalBus")
+enemy_parent = NodePath("../EnemyParent")
+
+[node name="EnemySpawnerTotem2" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("3_pngea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.3029)
+player = NodePath("../Player")
+signal_bus = NodePath("../SignalBus")
+enemy_parent = NodePath("../EnemyParent")
+
+[node name="EnemySpawnerTotem3" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("3_pngea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.4791, 0, -12.915)
+player = NodePath("../Player")
+signal_bus = NodePath("../SignalBus")
+enemy_parent = NodePath("../EnemyParent")
 
 [node name="XpSpawner" type="Node3D" parent="."]
 script = ExtResource("5_ex7yd")
@@ -226,10 +239,8 @@ camera_3D_resource = null
 [connection signal="level_up" from="Player" to="UI" method="_on_player_level_up"]
 [connection signal="level_up" from="Player" to="UI/UpgradeSelect" method="_on_player_level_up"]
 [connection signal="damage_dealt" from="SignalBus" to="DamageNotifier" method="_on_signal_bus_damage_dealt"]
-[connection signal="enemy_died" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_died" from="SignalBus" to="XpSpawner" method="_on_signal_bus_enemy_died"]
 [connection signal="enemy_died" from="SignalBus" to="UI" method="_on_signal_bus_enemy_died"]
-[connection signal="enemy_spawned" from="SignalBus" to="EnemySpawner" method="_on_signal_bus_enemy_spawned"]
 [connection signal="enemy_spawned" from="SignalBus" to="UI" method="_on_signal_bus_enemy_spawned"]
 [connection signal="gain_xp" from="SignalBus" to="Player" method="_on_signal_bus_gain_xp"]
 [connection signal="pause_game" from="SignalBus" to="SignalBus" method="_on_pause_game"]

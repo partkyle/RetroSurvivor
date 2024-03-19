@@ -1,0 +1,61 @@
+[gd_scene load_steps=12 format=3 uid="uid://c16fabcn8ptp"]
+
+[ext_resource type="Script" path="res://enemy_spawner_totem.gd" id="1_avg3v"]
+[ext_resource type="Shader" path="res://shaders/dissolve_no_cull.gdshader" id="1_lu72e"]
+[ext_resource type="Script" path="res://EnemySpawner.gd" id="3_4fjf6"]
+[ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemy.tscn" id="4_24wp5"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="4_oabtb"]
+[ext_resource type="PackedScene" uid="uid://dyx8vgqy8667j" path="res://health_bar.tscn" id="5_wr6hv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b80cj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oxyf2"]
+noise = SubResource("FastNoiseLite_b80cj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y8ij0"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_lu72e")
+shader_parameter/base_color = Color(0.807843, 0.541176, 0.545098, 1)
+shader_parameter/dissolve_height = 0.97
+shader_parameter/noise_scale = 1.0
+shader_parameter/time_scale = 0.7
+shader_parameter/glow_color = Color(0, 0.517647, 0.505882, 1)
+shader_parameter/glow_thickness = 0.05
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_oxyf2")
+
+[sub_resource type="SphereMesh" id="SphereMesh_5n7mk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l83ja"]
+
+[node name="EnemySpawnerTotem" type="CharacterBody3D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_avg3v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+material_override = SubResource("ShaderMaterial_y8ij0")
+mesh = SubResource("SphereMesh_5n7mk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("SphereShape3D_l83ja")
+
+[node name="EnemySpawner" type="Node3D" parent="." node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("3_4fjf6")
+enemy = ExtResource("4_24wp5")
+spawn_radius = Vector2(0, 10)
+spawn_point = NodePath("..")
+
+[node name="HealthComponent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.03811, 0)
+script = ExtResource("4_oabtb")
+max_health = 10
+health = 10
+
+[node name="HealthBar" parent="." instance=ExtResource("5_wr6hv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.90197, 0)
+
+[connection signal="health_below_zero" from="HealthComponent" to="." method="_on_health_component_health_below_zero"]
+[connection signal="health_updated" from="HealthComponent" to="." method="_on_health_component_health_updated"]

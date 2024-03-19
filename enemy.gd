@@ -1,6 +1,8 @@
 class_name Enemy
 extends CharacterBody3D
 
+signal death(enemy: Enemy)
+
 const SPEED := 2.0
 const EPISLON := 0.1
 
@@ -28,7 +30,7 @@ func _ready():
 
 func _physics_process(delta):
 	if target:
-		var direction := transform.basis * (target.transform.origin - transform.origin)
+		var direction := target.global_position - global_position
 		if direction.length() > EPISLON:
 			velocity = Vector3(direction.x, 0.0, direction.z).normalized() * SPEED
 	else:
@@ -42,10 +44,11 @@ func set_signal_bus(bus: SignalBus):
 	signal_bus = bus
 
 func die():
+	death.emit(self)
+	signal_bus.enemy_died.emit(self)
 	collider.queue_free()
 	health_bar.queue_free()
 	target = null
-	signal_bus.enemy_died.emit(self)
 	create_tween() \
 		.set_ease(Tween.EASE_OUT) \
 		.tween_method(set_dissolve_height, 1.0, 0.0, 1.2) \
