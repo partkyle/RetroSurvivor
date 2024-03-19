@@ -9,27 +9,17 @@ const EPISLON := 0.1
 @onready var mesh := $MeshInstance3D
 @onready var collider := $CollisionShape3D
 @onready var health_bar : HealthBar  = $HealthBar
+@onready var health_component : HealthComponent = $HealthComponent
 
 var target : Node3D
 
-var max_health := 30
-var health := max_health :
-	set(value):
-		health = value
-		health_bar.set_health_percent(float(health)/float(max_health))
-
+@export var max_health := 30
 
 var signal_bus : SignalBus
 
-func take_damage(damage: int):
-	popup_damage(damage)
-	health -= damage
-	if health <= 0:
-		die()
-
-func popup_damage(damage: int):
-	signal_bus.damage_dealt.emit(DamageEvent.create(damage, damage_notifier_position.global_position))
-
+func _ready():
+	health_component.max_health = max_health
+	health_component.health = max_health
 
 #func _process(delta):
 	#if target:
@@ -37,7 +27,6 @@ func popup_damage(damage: int):
 		#transform.origin = transform.origin.move_toward(target.transform.origin, SPEED * delta)
 
 func _physics_process(delta):
-	 #need to figure out if colliders is correct
 	if target:
 		var direction := transform.basis * (target.transform.origin - transform.origin)
 		if direction.length() > EPISLON:
@@ -57,7 +46,16 @@ func die():
 	health_bar.queue_free()
 	target = null
 	signal_bus.enemy_died.emit(self)
-	create_tween().set_ease(Tween.EASE_OUT).tween_method(set_dissolve_height, 1.0, 0.0, 1.2).connect('finished', func() : queue_free())
+	create_tween() \
+		.set_ease(Tween.EASE_OUT) \
+		.tween_method(set_dissolve_height, 1.0, 0.0, 1.2) \
+		.connect('finished', func() : queue_free())
 
 func set_dissolve_height(height: float):
 	mesh.material_override.set_shader_parameter('dissolve_height', height)
+
+func _on_health_component_health_below_zero():
+	die()
+
+func _on_health_component_health_updated(current, total):
+	health_bar.set_health_percent(float(current)/float(total))

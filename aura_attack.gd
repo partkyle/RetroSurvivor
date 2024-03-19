@@ -1,6 +1,8 @@
 extends Node3D
 class_name AuraAttack
 
+signal deal_damage(event: DamageEvent)
+
 @export var damage := 10
 @export var size := 5.0 :
 	set(value):
@@ -36,9 +38,12 @@ func _physics_process(delta):
 func attack():
 	var bodies = area.get_overlapping_bodies()
 
-	for body in bodies:
-		if body.has_method('take_damage'):
-			body.take_damage(calc_damage())
+	for body: Node3D in bodies:
+		if body.has_node('HealthComponent'):
+			var health_component := body.get_node('HealthComponent')
+			var damage := calc_damage()
+			deal_damage.emit(DamageEvent.create(damage, health_component.global_position))
+			health_component.take_damage(damage)
 
-func calc_damage():
+func calc_damage() -> float:
 	return damage * (1.0 + stats.attack_damage_buff)

@@ -3,7 +3,7 @@ class_name Player
 
 signal level_up(level: int)
 signal gain_xp(xp: int, xp_to_next_level: int)
-
+signal deal_damage(event: DamageEvent)
 
 var xp := 0
 var level := 1
@@ -62,7 +62,6 @@ func _add_xp(value: int):
 
 	gain_xp.emit(xp, xp_to_next_level)
 
-
 func _on_upgrade_select_select_powerup(powerup: PowerUp, rarity: PowerUp.Rarity):
 	match powerup.stat:
 		PowerUp.Stat.MOVE_SPEED:
@@ -77,3 +76,10 @@ func _on_upgrade_select_select_powerup(powerup: PowerUp, rarity: PowerUp.Rarity)
 			pickup_radius = stats.calc_pickup_radius()
 
 	%SignalBus.stats_updated.emit(stats.stats_text())
+
+func _on_health_component_health_below_zero():
+	print('player died')
+	queue_free()
+
+func _on_aura_deal_damage(event: DamageEvent):
+	deal_damage.emit(event)

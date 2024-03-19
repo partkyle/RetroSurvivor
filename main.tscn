@@ -221,6 +221,7 @@ tween_on_load = false
 inactive_update_mode = 0
 camera_3D_resource = null
 
+[connection signal="deal_damage" from="Player" to="DamageNotifier" method="_on_player_deal_damage"]
 [connection signal="gain_xp" from="Player" to="UI" method="_on_player_gain_xp"]
 [connection signal="level_up" from="Player" to="UI" method="_on_player_level_up"]
 [connection signal="level_up" from="Player" to="UI/UpgradeSelect" method="_on_player_level_up"]
