@@ -10,8 +10,8 @@
 - [ ] render attacks on aura somehow
 - [ ] attack speed increase
 - [ ] crit
-- [ ] more enemies with more xp
-- [ ] player needs to take damage
+- [ ] more enemies with
+	- [ ] more xp
 - [ ] objectives
 - [ ] player takes damage
 	- [ ] health component to share system between enemy and player
