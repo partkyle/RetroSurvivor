@@ -40,7 +40,6 @@ var is_child_of_camera: bool = false
 var _is_2D: bool
 
 
-var viewfinder_scene = load("res://addons/phantom_camera/panel/viewfinder/viewfinder_panel.tscn")
 var viewfinder_node: Control
 var viewfinder_needed_check: bool = true
 
@@ -138,7 +137,7 @@ func _assign_new_active_pcam(pcam: Node) -> void:
 
 		_active_pcam.Properties.is_active = false
 		_active_pcam.became_inactive.emit()
-
+		
 		if trigger_pcam_tween:
 			_active_pcam.tween_interrupted.emit(pcam)
 	else:
@@ -164,7 +163,7 @@ func _assign_new_active_pcam(pcam: Node) -> void:
 			_prev_active_pcam_3D_transform = _active_pcam.get_global_transform()
 
 	tween_duration = 0
-
+	
 	if pcam.Properties.tween_onload or not pcam.Properties.has_tweened:
 		trigger_pcam_tween = true
 
@@ -183,7 +182,7 @@ func _pcam_tween(delta: float) -> void:
 	# Run at the first tween frame
 	if tween_duration == 0:
 		_active_pcam.tween_started.emit()
-
+		
 		if _is_2D:
 			_active_pcam.reset_limit_all_sides()
 
@@ -197,6 +196,8 @@ func _pcam_tween(delta: float) -> void:
 			camera_2D.set_global_position(interpolation_destination.round())
 		else:
 			camera_2D.set_global_position(interpolation_destination)
+
+		camera_2D.rotation = _tween_interpolate_value(_prev_active_pcam_2D_transform.get_rotation(), _active_pcam_2D_glob_transform.get_rotation())
 
 		camera_2D.set_zoom(
 			_tween_interpolate_value(camera_zoom, _active_pcam.zoom)
@@ -255,6 +256,7 @@ func _pcam_follow(delta: float) -> void:
 			camera_2D.set_global_transform(pixel_perfect_glob_transform)
 		else:
 			camera_2D.set_global_transform(_active_pcam_2D_glob_transform)
+
 		if _active_pcam.Properties.has_follow_group:
 			if _active_pcam.Properties.follow_has_damping:
 				camera_2D.zoom = camera_2D.zoom.lerp(_active_pcam.zoom, delta * _active_pcam.Properties.follow_damping_value)
@@ -301,10 +303,10 @@ func _process_pcam(delta: float) -> void:
 			show_viewfinder_in_play()
 			_pcam_follow(delta)
 			_active_pcam.tween_completed.emit()
-
+			
 			if _is_2D:
 				_active_pcam.update_limit_all_sides()
-
+			
 				if Engine.is_editor_hint():
 					_active_pcam.queue_redraw()
 
@@ -345,8 +347,12 @@ func show_viewfinder_in_play() -> void:
 		if not Engine.is_editor_hint() && OS.has_feature("editor"): # Only appears when running in the editor
 			var canvas_layer: CanvasLayer = CanvasLayer.new()
 			get_tree().get_root().get_child(0).add_child(canvas_layer)
-
-			viewfinder_node = viewfinder_scene.instantiate()
+			
+			if is_instance_valid(viewfinder_node):
+				viewfinder_node.queue_free()
+			
+			var _viewfinder_scene := load("res://addons/phantom_camera/panel/viewfinder/viewfinder_panel.tscn")
+			viewfinder_node = _viewfinder_scene.instantiate()
 			canvas_layer.add_child(viewfinder_node)
 	else:
 		if viewfinder_node:
@@ -355,7 +361,7 @@ func show_viewfinder_in_play() -> void:
 
 func pcam_added_to_scene(pcam: Node) -> void:
 	_pcam_list.append(pcam)
-
+	
 	if not pcam.Properties.tween_onload:
 		pcam.Properties.has_tweened = true # Skips its tween if it has the highest priority onload
 
