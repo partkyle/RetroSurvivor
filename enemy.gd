@@ -67,4 +67,6 @@ func _on_health_component_health_updated(current, total):
 func _on_area_3d_body_entered(body):
 	if body is Player:
 		var health : HealthComponent = body.get_node('HealthComponent')
-		health.take_damage(10)
+		var damage := 10
+		health.take_damage(damage)
+		signal_bus.damage_dealt.emit(DamageEvent.create(damage, body.get_node('HealthComponent').global_position, Color.RED, 1.5))

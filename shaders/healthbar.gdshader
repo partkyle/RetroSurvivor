@@ -54,3 +54,8 @@ void fragment() {
 	ALBEDO = step(injured_percent, 1.0-xval) * mix(healthyColor, injuredColor, injured_percent * 1.25) * borderMask;
 	EMISSION = ALBEDO;
 }
+
+// ignore lighting
+void light() {
+
+}
