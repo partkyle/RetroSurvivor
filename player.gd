@@ -91,7 +91,6 @@ func _on_aura_deal_damage(event: DamageEvent):
 	deal_damage.emit(event)
 	var vamp := ceili(stats.vampirism * float(event.damage))
 	if vamp:
-		print('vamp :', vamp)
 		var amount = health_component.heal(vamp)
 		if amount:
 			deal_damage.emit(DamageEvent.create(amount, health_component.global_position, Color.GREEN, 1.2))
