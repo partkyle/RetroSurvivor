@@ -13,6 +13,5 @@ func popup_damage(event: DamageEvent):
 func _on_signal_bus_damage_dealt(event: DamageEvent):
 	popup_damage(event)
 
-
 func _on_player_deal_damage(event):
 	popup_damage(event)

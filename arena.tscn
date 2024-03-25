@@ -253,6 +253,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_1mmgd")
 
+[node name="Button" type="Button" parent="UI/GameOver"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -185.0
+offset_top = -191.0
+offset_right = 185.0
+offset_bottom = -117.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Restart Game"
+
 [node name="PhantomCamera3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 12, 6)
 script = ExtResource("18_t54sb")
@@ -303,3 +318,4 @@ attributes = SubResource("CameraAttributesPhysical_4wd0j")
 [connection signal="stats_updated" from="SignalBus" to="UI" method="_on_signal_bus_stats_updated"]
 [connection signal="unpause_game" from="SignalBus" to="SignalBus" method="_on_unpause_game"]
 [connection signal="select_powerup" from="UI/UpgradeSelect" to="Player" method="_on_upgrade_select_select_powerup"]
+[connection signal="pressed" from="UI/GameOver/Button" to="UI/GameOver" method="_on_button_pressed"]

@@ -9,5 +9,11 @@ func _on_player_death():
 
 func _input(event: InputEvent):
 	if dead and event.is_action("game_reload"):
-		get_tree().paused = false
-		SceneManager.load_arena()
+		start_new_game()
+
+func _on_button_pressed():
+	start_new_game()
+
+func start_new_game():
+	get_tree().paused = false
+	SceneManager.load_arena()
