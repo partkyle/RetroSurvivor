@@ -10,6 +10,7 @@ const EPISLON := 0.1
 
 @onready var mesh := $MeshInstance3D
 @onready var collider := $CollisionShape3D
+@onready var player_collider := $PlayerColliderArea3D
 @onready var health_bar : HealthBar  = $HealthBar
 @onready var health_component : HealthComponent = $HealthComponent
 
@@ -47,6 +48,7 @@ func die():
 	death.emit(self)
 	signal_bus.enemy_died.emit(self)
 	collider.queue_free()
+	player_collider.queue_free()
 	health_bar.queue_free()
 	target = null
 	create_tween() \
