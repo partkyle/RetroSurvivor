@@ -93,6 +93,9 @@ script = ExtResource("5_qq8w8")
 [node name="HealthBar" parent="." instance=ExtResource("6_134om")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.21914, 0)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10003, 2.21601, 0)
+
 [connection signal="deal_damage" from="Attacks/Aura" to="." method="_on_aura_deal_damage"]
 [connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]
 [connection signal="health_below_zero" from="HealthComponent" to="." method="_on_health_component_health_below_zero"]
