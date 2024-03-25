@@ -17,10 +17,10 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_lu72e")
 shader_parameter/base_color = Color(0.807843, 0.541176, 0.545098, 1)
-shader_parameter/dissolve_height = 0.97
+shader_parameter/dissolve_height = 0.83
 shader_parameter/noise_scale = 1.0
-shader_parameter/time_scale = 0.7
-shader_parameter/glow_color = Color(0, 0.517647, 0.505882, 1)
+shader_parameter/time_scale = 0.4
+shader_parameter/glow_color = Color(0, 0, 100, 1)
 shader_parameter/glow_thickness = 0.05
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_oxyf2")
 
