@@ -1,7 +1,7 @@
 class_name PowerUp
 extends Resource
 
-enum Stat { MOVE_SPEED, ATTACK_SPEED, ATTACK_RANGE, ATTACK_DAMAGE, PICKUP_RADIUS }
+enum Stat { MOVE_SPEED, ATTACK_SPEED, ATTACK_RANGE, ATTACK_DAMAGE, PICKUP_RADIUS, HEALTH_REGEN, VAMPIRISM }
 enum Rarity { COMMON, RARE, EPIC, LEGENDARY }
 
 const RARITY_TO_COLOR = {
@@ -23,4 +23,5 @@ const RARITY_TO_COLOR = {
 @export var icon : Texture2D
 
 func get_description(rarity: Rarity) -> String:
-	return description % [int(rarity_scaling[rarity] * 100)]
+	var display = int(rarity_scaling[rarity] * 100)
+	return description % [display]

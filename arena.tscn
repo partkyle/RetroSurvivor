@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=33 format=3 uid="uid://jcflgwwwn1le"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_kyse6"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="2_5fosw"]
@@ -16,7 +16,9 @@
 [ext_resource type="Resource" uid="uid://b8dxnhsqnei88" path="res://resources/powerups/damage.tres" id="14_pei87"]
 [ext_resource type="Resource" uid="uid://drec0q66v6eb7" path="res://resources/powerups/pickup_radius.tres" id="15_xdyh8"]
 [ext_resource type="Script" path="res://game_over.gd" id="16_0dgqe"]
+[ext_resource type="Resource" uid="uid://c72rljnbf3742" path="res://resources/powerups/health_regen.tres" id="16_xf7wi"]
 [ext_resource type="Texture2D" uid="uid://cyqf2lb5ojevj" path="res://assets/ded.png" id="17_1mmgd"]
+[ext_resource type="Resource" uid="uid://ceciyiosn6j4w" path="res://resources/powerups/vampirism.tres" id="17_q4ppy"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="18_t54sb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ltofi"]
@@ -232,7 +234,7 @@ show_percentage = false
 [node name="UpgradeSelect" parent="UI" instance=ExtResource("11_vkao0")]
 visible = false
 offset_right = -0.00012207
-choices = Array[Resource("res://resources/powerups/powerup.gd")]([ExtResource("12_5set2"), ExtResource("13_lj5sq"), ExtResource("14_pei87"), ExtResource("15_xdyh8")])
+choices = Array[Resource("res://resources/powerups/powerup.gd")]([ExtResource("12_5set2"), ExtResource("13_lj5sq"), ExtResource("14_pei87"), ExtResource("15_xdyh8"), ExtResource("16_xf7wi"), ExtResource("17_q4ppy")])
 
 [node name="GameOver" type="ColorRect" parent="UI"]
 visible = false

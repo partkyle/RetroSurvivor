@@ -13,3 +13,13 @@ func take_damage(damage: int):
 	health_updated.emit(health, max_health)
 	if health <= 0:
 		health_below_zero.emit()
+
+
+func heal(amount: int):
+	# skip this and the notification
+	if amount and health < max_health:
+		health = clamp(health + amount, 0, max_health)
+		health_updated.emit(health, max_health)
+		return amount
+
+	return 0

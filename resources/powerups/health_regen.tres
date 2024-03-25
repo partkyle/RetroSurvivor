@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=4 format=3 uid="uid://c72rljnbf3742"]
+
+[ext_resource type="Script" path="res://resources/powerups/powerup.gd" id="1_0f6oe"]
+[ext_resource type="Texture2D" uid="uid://dryojk6brxwgb" path="res://assets/icons.png" id="1_n61ql"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fk5s3"]
+atlas = ExtResource("1_n61ql")
+region = Rect2(128, 0, 32, 32)
+filter_clip = true
+
+[resource]
+script = ExtResource("1_0f6oe")
+name = "Health Regen"
+stat = 5
+description = "Increase healing by %d per second"
+rarity_scaling = {
+0: 1,
+1: 2,
+2: 3,
+3: 5
+}
+icon = SubResource("AtlasTexture_fk5s3")

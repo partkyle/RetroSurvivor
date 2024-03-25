@@ -14,6 +14,7 @@ var xp_to_next_level := 100
 @onready var attack_aura : AuraAttack = $Attacks/Aura
 @onready var pickup_collider := $Pickup/CollisionShape3D
 @onready var health_bar := $HealthBar
+@onready var health_component := $HealthComponent
 
 @export var pickup_radius := 5.0 :
 	set(value):
@@ -76,15 +77,30 @@ func _on_upgrade_select_select_powerup(powerup: PowerUp, rarity: PowerUp.Rarity)
 		PowerUp.Stat.PICKUP_RADIUS:
 			stats.pickup_radius_buff += powerup.rarity_scaling[rarity]
 			pickup_radius = stats.calc_pickup_radius()
+		PowerUp.Stat.HEALTH_REGEN:
+			stats.health_regen += powerup.rarity_scaling[rarity]
+		PowerUp.Stat.VAMPIRISM:
+			stats.vampirism += powerup.rarity_scaling[rarity]
 
 	%SignalBus.stats_updated.emit(stats.stats_text())
 
 func _on_health_component_health_below_zero():
-	print('player died')
 	death.emit()
 
 func _on_aura_deal_damage(event: DamageEvent):
 	deal_damage.emit(event)
+	var vamp := ceili(stats.vampirism * float(event.damage))
+	if vamp:
+		print('vamp :', vamp)
+		var amount = health_component.heal(vamp)
+		if amount:
+			deal_damage.emit(DamageEvent.create(amount, health_component.global_position, Color.GREEN, 1.2))
 
 func _on_health_component_health_updated(current, total):
 	health_bar.set_health_percent(float(current)/float(total))
+
+func _on_heal_per_second_timer_timeout():
+	if stats.health_regen:
+		var amount = health_component.heal(stats.health_regen)
+		if amount:
+			deal_damage.emit(DamageEvent.create(amount, health_component.global_position, Color.GREEN, 1.2))
