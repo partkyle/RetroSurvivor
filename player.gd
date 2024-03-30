@@ -41,6 +41,9 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 		velocity.z = move_toward(velocity.z, 0, move_speed)
 
+	if Input.is_action_just_pressed("dash"):
+		velocity *= 100
+
 	move_and_slide()
 
 
