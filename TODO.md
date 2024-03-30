@@ -7,16 +7,17 @@
 - [x] leveling powerup choices
 - [x] xp scaling ??
 - [x] healthbar border
+- [x] game over screen
+- [x] player takes damage
+	- [x] health component to share system between enemy and player
+	- [x] should get damage popups for free
+- [x] healing
 - [ ] render attacks on aura somehow
 - [ ] attack speed increase
 - [ ] crit
 - [ ] more enemies with
 	- [ ] more xp
 - [ ] objectives
-- [ ] player takes damage
-	- [ ] health component to share system between enemy and player
-	- [ ] should get damage popups for free
-- [ ] game over screen
 - [ ] levelselect
 	- [ ] rouguelike map ?
 - [ ] phases based on enemies killed (xp that is available, but not collected? kills?)
