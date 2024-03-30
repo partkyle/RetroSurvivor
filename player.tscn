@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://p0nwwoiajish"]
+[gd_scene load_steps=18 format=3 uid="uid://p0nwwoiajish"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_j4niv"]
 [ext_resource type="Script" path="res://aura_attack.gd" id="2_fagvc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://components/stats_component.gd" id="4_2i3uy"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="5_qq8w8"]
 [ext_resource type="PackedScene" uid="uid://dyx8vgqy8667j" path="res://health_bar.tscn" id="6_134om"]
+[ext_resource type="Texture2D" uid="uid://cd2aox0dadcg" path="res://assets/minimap.png" id="7_wshaj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_myua3"]
 albedo_color = Color(0, 1, 1, 1)
@@ -41,6 +42,10 @@ height = 100.0
 radius = 5.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tp46d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkum1"]
+atlas = ExtResource("7_wshaj")
+region = Rect2(0, 0, 32, 32)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 9
@@ -98,6 +103,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10003, 2.21601, 0)
 
 [node name="HealPerSecondTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="MinimapSprite" type="Sprite3D" parent="."]
+layers = 2
+modulate = Color(0, 1, 1, 1)
+billboard = 1
+texture = SubResource("AtlasTexture_rkum1")
 
 [connection signal="deal_damage" from="Attacks/Aura" to="." method="_on_aura_deal_damage"]
 [connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]

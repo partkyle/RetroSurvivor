@@ -1,8 +1,7 @@
-[gd_scene load_steps=33 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=32 format=3 uid="uid://jcflgwwwn1le"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_kyse6"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="2_5fosw"]
-[ext_resource type="Texture2D" uid="uid://6jy1584gnol" path="res://icon.svg" id="3_cda50"]
 [ext_resource type="PackedScene" uid="uid://c16fabcn8ptp" path="res://enemy_spawner_totem.tscn" id="4_1k52j"]
 [ext_resource type="Script" path="res://xp_spawner.gd" id="5_1pd12"]
 [ext_resource type="PackedScene" uid="uid://5vtvxlilkwxa" path="res://xp.tscn" id="6_8fcpg"]
@@ -90,11 +89,6 @@ shape = SubResource("ConcavePolygonShape3D_v6tgy")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.565, 0)
 remote_path = NodePath("../../Minimap/SubViewportContainer/SubViewport/Camera3D")
 update_scale = false
-
-[node name="Sprite3D" type="Sprite3D" parent="Player"]
-layers = 2
-billboard = 1
-texture = ExtResource("3_cda50")
 
 [node name="EnemyParent" type="Node3D" parent="."]
 
@@ -305,6 +299,8 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.565, 0)
 cull_mask = 2
 attributes = SubResource("CameraAttributesPhysical_4wd0j")
+projection = 1
+size = 20.0
 
 [connection signal="deal_damage" from="Player" to="DamageNotifier" method="_on_player_deal_damage"]
 [connection signal="death" from="Player" to="UI/GameOver" method="_on_player_death"]

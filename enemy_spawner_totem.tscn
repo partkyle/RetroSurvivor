@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c16fabcn8ptp"]
+[gd_scene load_steps=14 format=3 uid="uid://c16fabcn8ptp"]
 
 [ext_resource type="Script" path="res://enemy_spawner_totem.gd" id="1_avg3v"]
 [ext_resource type="Shader" path="res://shaders/dissolve_no_cull.gdshader" id="1_lu72e"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemy.tscn" id="4_24wp5"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="4_oabtb"]
 [ext_resource type="PackedScene" uid="uid://dyx8vgqy8667j" path="res://health_bar.tscn" id="5_wr6hv"]
+[ext_resource type="Texture2D" uid="uid://cd2aox0dadcg" path="res://assets/minimap.png" id="7_2abev"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b80cj"]
 
@@ -27,6 +28,10 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_oxyf2")
 [sub_resource type="SphereMesh" id="SphereMesh_5n7mk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_l83ja"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o78wh"]
+atlas = ExtResource("7_2abev")
+region = Rect2(0, 0, 32, 32)
 
 [node name="EnemySpawnerTotem" type="CharacterBody3D"]
 collision_layer = 3
@@ -56,6 +61,12 @@ health = 10
 
 [node name="HealthBar" parent="." instance=ExtResource("5_wr6hv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.90197, 0)
+
+[node name="MinimapSprite" type="Sprite3D" parent="."]
+layers = 2
+modulate = Color(0.447059, 0, 1, 1)
+billboard = 1
+texture = SubResource("AtlasTexture_o78wh")
 
 [connection signal="health_below_zero" from="HealthComponent" to="." method="_on_health_component_health_below_zero"]
 [connection signal="health_updated" from="HealthComponent" to="." method="_on_health_component_health_updated"]
