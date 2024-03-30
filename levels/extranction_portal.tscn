@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://b2188ornd2ksf"]
+
+[ext_resource type="Shader" path="res://shaders/extranction_portal.gdshader" id="1_eunsp"]
+[ext_resource type="Script" path="res://levels/extranction_portal.gd" id="1_kbc74"]
+[ext_resource type="Texture2D" uid="uid://cd2aox0dadcg" path="res://assets/minimap.png" id="3_eosgo"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p7a2c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3sr52"]
+noise = SubResource("FastNoiseLite_p7a2c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ojy8l"]
+render_priority = 0
+shader = ExtResource("1_eunsp")
+shader_parameter/color = Color(0.351302, 0.297218, 0.750267, 1)
+shader_parameter/ring_width = 0.02
+shader_parameter/time_scale = 5.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_3sr52")
+
+[sub_resource type="QuadMesh" id="QuadMesh_b87yn"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f21po"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh2np"]
+atlas = ExtResource("3_eosgo")
+region = Rect2(0, 0, 32, 32)
+
+[node name="ExtranctionPortal" type="Node3D"]
+script = ExtResource("1_kbc74")
+
+[node name="Scaler" type="Node3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scaler"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_ojy8l")
+mesh = SubResource("QuadMesh_b87yn")
+skeleton = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="Scaler"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scaler/Area3D"]
+shape = SubResource("CylinderShape3D_f21po")
+
+[node name="MinimapSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+layers = 2
+modulate = Color(0, 0, 1, 1)
+pixel_size = 0.5
+billboard = 1
+texture = SubResource("AtlasTexture_yh2np")
+
+[connection signal="body_entered" from="Scaler/Area3D" to="." method="_on_area_3d_body_entered"]

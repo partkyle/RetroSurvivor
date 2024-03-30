@@ -8,6 +8,9 @@ func _ready():
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 
+func reset_arena():
+	goto_scene(arena_scene)
+
 func load_arena():
 	goto_scene(arena_scene)
 

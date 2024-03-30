@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=35 format=3 uid="uid://jcflgwwwn1le"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_kyse6"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="2_5fosw"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cbx8n2n76d1xe" path="res://enemies/boss_enemy.tscn" id="5_x2mpg"]
 [ext_resource type="PackedScene" uid="uid://5vtvxlilkwxa" path="res://xp.tscn" id="6_8fcpg"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="7_salve"]
+[ext_resource type="PackedScene" uid="uid://b2188ornd2ksf" path="res://levels/extranction_portal.tscn" id="8_6eveq"]
 [ext_resource type="Script" path="res://damage_notifier.gd" id="8_kwybg"]
 [ext_resource type="PackedScene" uid="uid://c1j0q4pbd3wsu" path="res://damage_popup.tscn" id="9_svd4l"]
 [ext_resource type="Script" path="res://UI.gd" id="10_npakd"]
@@ -114,6 +115,7 @@ enemy_parent = NodePath("../EnemyParent")
 [node name="BossSpawner" type="Node3D" parent="." node_paths=PackedStringArray("signal_bus", "spawn_near_target", "spawn_parent", "watch_list", "player")]
 script = ExtResource("4_12mjx")
 boss = ExtResource("5_x2mpg")
+extraction = ExtResource("8_6eveq")
 signal_bus = NodePath("../SignalBus")
 spawn_near_target = NodePath("../Player")
 spawn_parent = NodePath("../EnemyParent")
@@ -310,7 +312,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.
 cull_mask = 2
 projection = 1
 fov = 37.8493
-size = 20.0
+size = 40.0
 
 [connection signal="deal_damage" from="Player" to="DamageNotifier" method="_on_player_deal_damage"]
 [connection signal="death" from="Player" to="UI/GameOver" method="_on_player_death"]
