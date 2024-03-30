@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 class_name AuraAttack
 
 signal deal_damage(event: DamageEvent)

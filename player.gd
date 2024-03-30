@@ -10,6 +10,7 @@ var xp := 0
 var level := 1
 var xp_to_next_level := 100
 
+@onready var mesh := $MeshInstance3D
 @onready var stats := $StatsComponent
 @onready var attack_aura : AuraAttack = $Attacks/Aura
 @onready var pickup_collider := $Pickup/CollisionShape3D
@@ -100,6 +101,8 @@ func _on_aura_deal_damage(event: DamageEvent):
 
 func _on_health_component_health_updated(current, total):
 	health_bar.set_health_percent(float(current)/float(total))
+	mesh.material_override.set_shader_parameter("flash", 1)
+	get_tree().create_timer(0.2).connect('timeout', func(): mesh.material_override.set_shader_parameter("flash", 0))
 
 func _on_heal_per_second_timer_timeout():
 	if stats.health_regen:

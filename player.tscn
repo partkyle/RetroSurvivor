@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://p0nwwoiajish"]
+[gd_scene load_steps=19 format=3 uid="uid://p0nwwoiajish"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_j4niv"]
+[ext_resource type="Shader" path="res://shaders/player.gdshader" id="2_2ginq"]
 [ext_resource type="Script" path="res://aura_attack.gd" id="2_fagvc"]
 [ext_resource type="Shader" path="res://shaders/dissolve_no_cull.gdshader" id="3_y2jjf"]
 [ext_resource type="Script" path="res://components/stats_component.gd" id="4_2i3uy"]
@@ -8,8 +9,21 @@
 [ext_resource type="PackedScene" uid="uid://dyx8vgqy8667j" path="res://health_bar.tscn" id="6_134om"]
 [ext_resource type="Texture2D" uid="uid://cd2aox0dadcg" path="res://assets/minimap.png" id="7_wshaj"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_myua3"]
-albedo_color = Color(0, 1, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1ldo"]
+render_priority = 0
+shader = ExtResource("2_2ginq")
+shader_parameter/albedo = Color(0, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/flash = 0
+shader_parameter/flash_time_scale = 40.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ga450"]
 
@@ -54,7 +68,7 @@ script = ExtResource("1_j4niv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_myua3")
+material_override = SubResource("ShaderMaterial_e1ldo")
 mesh = SubResource("CapsuleMesh_ga450")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

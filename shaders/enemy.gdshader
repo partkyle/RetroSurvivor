@@ -5,6 +5,9 @@ uniform vec3 start_color : source_color = vec3(0.0, 1.0, 0.0);
 uniform vec3 end_color: source_color = vec3(1.0, 0.0, 0.0);
 uniform float mix_amount: hint_range(0.0, 1.0, 0.05) = 0.0;
 
+uniform int flash = 0;
+uniform float flash_time_scale: hint_range(0.0, 100.0, 0.1) = 10.0;
+
 uniform sampler2D noise_texture;
 
 // The height of the dissolve effect. This can be thought of as a percentage
@@ -31,7 +34,9 @@ void vertex() {
 
 void fragment() {
 	// Called for every pixel the material is visible on.
-	ALBEDO = mix(start_color, end_color, mix_amount);
+	vec3 final_color = mix(start_color, end_color, mix_amount);
+	vec3 flash_color = float(flash) * clamp(final_color + (sin(TIME * flash_time_scale) * 0.5 + 0.5) * vec3(1.0), 0.0, 1.0);
+	ALBEDO = (final_color * float(1-flash)) + flash_color;
 
 	// get a noise value and only use one the r channel
 	float noise_at = texture(noise_texture, UV + TIME * time_scale).r * noise_scale;

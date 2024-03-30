@@ -64,6 +64,8 @@ func _on_health_component_health_below_zero():
 
 func _on_health_component_health_updated(current, total):
 	health_bar.set_health_percent(float(current)/float(total))
+	mesh.material_override.set_shader_parameter("flash", 1)
+	get_tree().create_timer(0.2).connect('timeout', func(): mesh.material_override.set_shader_parameter("flash", 0))
 
 
 func _on_area_3d_body_entered(body):
