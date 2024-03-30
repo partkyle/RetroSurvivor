@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://c16fabcn8ptp"]
+[gd_scene load_steps=15 format=3 uid="uid://c16fabcn8ptp"]
 
-[ext_resource type="Script" path="res://enemy_spawner_totem.gd" id="1_avg3v"]
+[ext_resource type="Script" path="res://enemies/enemy_spawner_totem.gd" id="1_avg3v"]
 [ext_resource type="Shader" path="res://shaders/dissolve_no_cull.gdshader" id="1_lu72e"]
-[ext_resource type="Script" path="res://EnemySpawner.gd" id="3_4fjf6"]
-[ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemy.tscn" id="4_24wp5"]
+[ext_resource type="Script" path="res://enemies/EnemySpawner.gd" id="3_4fjf6"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="4_oabtb"]
+[ext_resource type="PackedScene" uid="uid://dfxm1jyn6mua8" path="res://triangle_enemy.tscn" id="4_uktyo"]
+[ext_resource type="PackedScene" uid="uid://ua2ky0yk18cv" path="res://enemies/cylinder_enemy.tscn" id="5_2iggc"]
 [ext_resource type="PackedScene" uid="uid://dyx8vgqy8667j" path="res://health_bar.tscn" id="5_wr6hv"]
 [ext_resource type="Texture2D" uid="uid://cd2aox0dadcg" path="res://assets/minimap.png" id="7_2abev"]
 
@@ -49,7 +50,7 @@ shape = SubResource("SphereShape3D_l83ja")
 
 [node name="EnemySpawner" type="Node3D" parent="." node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("3_4fjf6")
-enemy = ExtResource("4_24wp5")
+enemies = Array[PackedScene]([ExtResource("4_uktyo"), ExtResource("5_2iggc")])
 spawn_radius = Vector2(0, 10)
 spawn_point = NodePath("..")
 

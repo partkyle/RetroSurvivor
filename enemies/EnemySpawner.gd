@@ -1,7 +1,7 @@
 class_name EnemySpawner
 extends Node3D
 
-@export var enemy : PackedScene
+@export var enemies : Array[PackedScene]
 @export var spawn_radius := Vector2(4, 10)
 @export var max_count := 25
 @export var spawn_point : Node3D = self
@@ -18,7 +18,7 @@ var total := 0
 func spawn_enemy():
 	if total <= max_count:
 		total += 1
-		var new_enemy = enemy.instantiate()
+		var new_enemy = enemies.pick_random().instantiate()
 		new_enemy.transform.origin = spawn_point.transform.origin + random_direction() * randf_range(spawn_radius.x, spawn_radius.y)
 		enemy_parent.add_child(new_enemy)
 		signal_bus.enemy_spawned.emit(new_enemy)

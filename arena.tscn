@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_kyse6"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="2_5fosw"]
-[ext_resource type="PackedScene" uid="uid://c16fabcn8ptp" path="res://enemy_spawner_totem.tscn" id="4_1k52j"]
+[ext_resource type="PackedScene" uid="uid://c16fabcn8ptp" path="res://enemies/enemy_spawner_totem.tscn" id="4_1k52j"]
 [ext_resource type="Script" path="res://xp_spawner.gd" id="5_1pd12"]
 [ext_resource type="PackedScene" uid="uid://5vtvxlilkwxa" path="res://xp.tscn" id="6_8fcpg"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="7_salve"]

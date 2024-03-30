@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://catxiq3pmdnu3"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_fpeth"]
-[ext_resource type="Material" uid="uid://dsqbuxvv5ubi5" path="res://shaders/enemy_shader.tres" id="2_qj4md"]
-[ext_resource type="PackedScene" uid="uid://dyx8vgqy8667j" path="res://health_bar.tscn" id="3_grssf"]
-[ext_resource type="Script" path="res://components/health_component.gd" id="4_t4b1q"]
-[ext_resource type="Texture2D" uid="uid://cd2aox0dadcg" path="res://assets/minimap.png" id="5_6t8bt"]
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_bhbjt"]
+[ext_resource type="Material" uid="uid://dsqbuxvv5ubi5" path="res://shaders/enemy_shader.tres" id="2_uqukl"]
+[ext_resource type="PackedScene" uid="uid://dyx8vgqy8667j" path="res://health_bar.tscn" id="3_ysopg"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="4_ck280"]
+[ext_resource type="Texture2D" uid="uid://cd2aox0dadcg" path="res://assets/minimap.png" id="5_jsqim"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_ojv4n"]
 
@@ -13,29 +13,29 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_gb81q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8x0jn"]
-atlas = ExtResource("5_6t8bt")
+atlas = ExtResource("5_jsqim")
 region = Rect2(0, 0, 32, 32)
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 6
 collision_mask = 6
-script = ExtResource("1_fpeth")
+script = ExtResource("1_bhbjt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-material_override = ExtResource("2_qj4md")
+material_override = ExtResource("2_uqukl")
 mesh = SubResource("PrismMesh_ojv4n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_d5r3c")
 
-[node name="HealthBar" parent="." instance=ExtResource("3_grssf")]
+[node name="HealthBar" parent="." instance=ExtResource("3_ysopg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 
 [node name="HealthComponent" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42192, 0)
-script = ExtResource("4_t4b1q")
+script = ExtResource("4_ck280")
 
 [node name="PlayerColliderArea3D" type="Area3D" parent="."]
 collision_layer = 0

@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://ua2ky0yk18cv"]
+
+[ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemies/enemy.tscn" id="1_f4yl5"]
+[ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="2_jos2s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e5yvx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tc0cw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_exa3e"]
+noise = SubResource("FastNoiseLite_tc0cw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_usnm4"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_e5yvx")
+shader = ExtResource("2_jos2s")
+shader_parameter/start_color = Color(0.592157, 0.443137, 0.160784, 1)
+shader_parameter/end_color = Color(1, 0, 0, 1)
+shader_parameter/mix_amount = 0.0
+shader_parameter/flash = 0
+shader_parameter/flash_time_scale = 40.0
+shader_parameter/dissolve_height = 1.0
+shader_parameter/noise_scale = 0.5
+shader_parameter/time_scale = 0.0
+shader_parameter/glow_color = Color(100, 0, 100, 1)
+shader_parameter/glow_thickness = 0.05
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_exa3e")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dhrbl"]
+height = 1.0
+
+[node name="Enemy" instance=ExtResource("1_f4yl5")]
+
+[node name="MeshInstance3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0)
+material_override = SubResource("ShaderMaterial_usnm4")
+mesh = SubResource("CylinderMesh_dhrbl")

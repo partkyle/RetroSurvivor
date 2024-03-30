@@ -31,6 +31,7 @@ func _ready():
 
 func _physics_process(delta):
 	if target:
+		look_at(target.global_position)
 		var direction := target.global_position - global_position
 		if direction.length() > EPISLON:
 			velocity = Vector3(direction.x, 0.0, direction.z).normalized() * SPEED
