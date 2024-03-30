@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=4 format=3 uid="uid://b7ro1mtduu8t1"]
+
+[ext_resource type="Texture2D" uid="uid://dryojk6brxwgb" path="res://assets/icons.png" id="1_0ds2b"]
+[ext_resource type="Script" path="res://resources/powerups/powerup.gd" id="1_q6rvf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbug6"]
+atlas = ExtResource("1_0ds2b")
+region = Rect2(192, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_q6rvf")
+name = "Attack Speed"
+stat = 1
+description = "Increase attack speed by %d%%"
+rarity_scaling = {
+0: 0.1,
+1: 0.25,
+2: 0.5,
+3: 1.0
+}
+icon = SubResource("AtlasTexture_nbug6")

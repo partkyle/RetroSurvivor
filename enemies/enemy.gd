@@ -16,13 +16,7 @@ const EPISLON := 0.1
 
 var target : Node3D
 
-@export var max_health := 30
-
 var signal_bus : SignalBus
-
-func _ready():
-	health_component.max_health = max_health
-	health_component.health = max_health
 
 #func _process(delta):
 	#if target:

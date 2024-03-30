@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfxm1jyn6mua8"]
 
-[ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemies/enemy.tscn" id="1_ef4oa"]
-[ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="2_rmo72"]
+[ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemies/enemy.tscn" id="1_eb25x"]
+[ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="2_hfeh2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e5yvx"]
 
@@ -14,7 +14,7 @@ noise = SubResource("FastNoiseLite_tc0cw")
 resource_local_to_scene = true
 render_priority = 0
 next_pass = SubResource("ShaderMaterial_e5yvx")
-shader = ExtResource("2_rmo72")
+shader = ExtResource("2_hfeh2")
 shader_parameter/start_color = Color(0.729412, 0.32549, 0.333333, 1)
 shader_parameter/end_color = Color(1, 0, 0, 1)
 shader_parameter/mix_amount = 0.0
@@ -27,7 +27,10 @@ shader_parameter/glow_color = Color(100, 0, 100, 1)
 shader_parameter/glow_thickness = 0.05
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_exa3e")
 
-[node name="Enemy" instance=ExtResource("1_ef4oa")]
+[node name="Enemy" instance=ExtResource("1_eb25x")]
 
 [node name="MeshInstance3D" parent="." index="0"]
 material_override = SubResource("ShaderMaterial_1ioml")
+
+[node name="HealthComponent" parent="." index="3"]
+max_health = 30

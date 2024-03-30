@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbx8n2n76d1xe"]
+
+[ext_resource type="PackedScene" uid="uid://catxiq3pmdnu3" path="res://enemies/enemy.tscn" id="1_n5ks1"]
+[ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="2_vrejn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e5yvx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tc0cw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_exa3e"]
+noise = SubResource("FastNoiseLite_tc0cw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xyeu"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_e5yvx")
+shader = ExtResource("2_vrejn")
+shader_parameter/start_color = Color(0.729412, 0.32549, 0.333333, 1)
+shader_parameter/end_color = Color(1, 0, 0, 1)
+shader_parameter/mix_amount = 0.0
+shader_parameter/flash = 0
+shader_parameter/flash_time_scale = 40.0
+shader_parameter/dissolve_height = 1.0
+shader_parameter/noise_scale = 0.5
+shader_parameter/time_scale = 0.0
+shader_parameter/glow_color = Color(100, 0, 100, 1)
+shader_parameter/glow_thickness = 0.05
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_exa3e")
+
+[sub_resource type="TorusMesh" id="TorusMesh_nvpp4"]
+outer_radius = 2.0
+
+[node name="Enemy" instance=ExtResource("1_n5ks1")]
+
+[node name="MeshInstance3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0)
+material_override = SubResource("ShaderMaterial_5xyeu")
+mesh = SubResource("TorusMesh_nvpp4")
+
+[node name="HealthBar" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.31522, 0)
+
+[node name="HealthComponent" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.596, 0)
+max_health = 1000

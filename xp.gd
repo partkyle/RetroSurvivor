@@ -5,7 +5,7 @@ const DURATION = 0.2
 const SPEED = 10.0
 const EPSILON = 0.01
 
-@export var value = 10
+@export var value = 100
 
 var target : Node3D
 var signal_bus : SignalBus

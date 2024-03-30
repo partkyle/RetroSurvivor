@@ -85,6 +85,8 @@ func _on_upgrade_select_select_powerup(powerup: PowerUp, rarity: PowerUp.Rarity)
 			stats.health_regen += powerup.rarity_scaling[rarity]
 		PowerUp.Stat.VAMPIRISM:
 			stats.vampirism += powerup.rarity_scaling[rarity]
+		PowerUp.Stat.ATTACK_SPEED:
+			stats.attack_speed += powerup.rarity_scaling[rarity]
 
 	%SignalBus.stats_updated.emit(stats.stats_text())
 

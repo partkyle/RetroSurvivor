@@ -30,8 +30,9 @@ func set_size(size: float):
 		collider.shape.radius = size
 
 func _physics_process(delta):
+	var time_until_next_attack = seconds_per_attack / (1.0 + stats.attack_speed)
 	time_since_last_attack += delta
-	while time_since_last_attack > seconds_per_attack:
+	while time_since_last_attack > time_until_next_attack:
 		time_since_last_attack -= seconds_per_attack
 		attack()
 

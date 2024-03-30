@@ -12,7 +12,7 @@ filter_clip = true
 script = ExtResource("1_0f6oe")
 name = "Health Regen"
 stat = 5
-description = "Increase healing by %d per second"
+description = "Increase health by %d per second"
 rarity_scaling = {
 0: 1,
 1: 2,

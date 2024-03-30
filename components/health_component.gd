@@ -7,6 +7,9 @@ signal health_updated(current: int, total: int)
 @export var max_health := 100
 @export var health := max_health
 
+func _ready():
+	health = max_health
+
 
 func take_damage(damage: int):
 	health -= damage

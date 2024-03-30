@@ -12,7 +12,10 @@
 	- [x] health component to share system between enemy and player
 	- [x] should get damage popups for free
 - [x] healing
-- [ ] render attacks on aura somehow
+- [ ] -render attacks on aura somehow-
+	- [x] render hit registrations
+- [ ] damage and health are treated the same, thus we have
+- [ ] healing is pretty hardcoded (vamp vs regen)
 - [ ] attack speed increase
 - [ ] crit
 - [ ] more enemies with
