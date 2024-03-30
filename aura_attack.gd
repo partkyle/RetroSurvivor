@@ -13,7 +13,6 @@ signal deal_damage(event: DamageEvent)
 @onready var mesh := $Area3D/MeshInstance3D
 @onready var area := $Area3D
 
-@onready var stats := $"../../StatsComponent"
 
 @export var seconds_per_attack := 1.0
 var time_since_last_attack := 0.0
@@ -30,7 +29,7 @@ func set_size(size: float):
 		collider.shape.radius = size
 
 func _physics_process(delta):
-	var time_until_next_attack = seconds_per_attack / (1.0 + stats.attack_speed)
+	var time_until_next_attack = seconds_per_attack / (1.0 + PlayerStats.attack_speed)
 	time_since_last_attack += delta
 	while time_since_last_attack > time_until_next_attack:
 		time_since_last_attack -= seconds_per_attack
@@ -47,5 +46,5 @@ func attack():
 			health_component.take_damage(damage)
 
 func calc_damage() -> float:
-	return damage * (1.0 + stats.attack_damage_buff)
+	return damage * (1.0 + PlayerStats.attack_damage_buff)
 

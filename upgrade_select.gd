@@ -20,6 +20,8 @@ func _ready():
 		c.set_control_parent(self)
 	setup_choices()
 
+	PlayerStats.level_up.connect(_on_player_level_up)
+
 
 var previous_level := 1
 

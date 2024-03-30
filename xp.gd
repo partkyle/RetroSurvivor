@@ -17,7 +17,7 @@ func _process(delta):
 		speed += 0.1
 		global_position = global_position.move_toward(target.global_position, speed * delta)
 		if (target.global_position - global_position).length() < EPSILON:
-			signal_bus.gain_xp.emit(value)
+			PlayerStats.add_xp(value)
 			queue_free()
 
 

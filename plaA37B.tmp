@@ -78,6 +78,9 @@ shape = SubResource("CapsuleShape3D_0wjxs")
 
 [node name="Aura" type="Node3D" parent="Attacks"]
 script = ExtResource("2_fagvc")
+damage = null
+size = null
+seconds_per_attack = null
 
 [node name="Area3D" type="Area3D" parent="Attacks/Aura"]
 collision_layer = 2

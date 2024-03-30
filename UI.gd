@@ -50,6 +50,14 @@ var stats := "" :
 		stats = value
 		stats_label.text = value
 
+
+func _process(delta: float):
+	stats = PlayerStats.stats_text()
+
+	current_xp = PlayerStats.xp
+	xp_to_next_level = PlayerStats.xp_to_next_level
+	level = PlayerStats.level
+
 func _on_signal_bus_enemy_died(enemy):
 	kills += 1
 	alive -= 1
@@ -58,14 +66,3 @@ func _on_signal_bus_enemy_died(enemy):
 func _on_signal_bus_enemy_spawned(enemy):
 	alive += 1
 	total += 1
-
-func _on_player_level_up(_level):
-	level = _level
-
-func _on_player_gain_xp(_xp, _xp_to_next_level):
-	xp += _xp
-	current_xp = _xp
-	xp_to_next_level = _xp_to_next_level
-
-func _on_signal_bus_stats_updated(_stats):
-	stats = _stats

@@ -3,10 +3,8 @@ class_name SignalBus
 
 signal enemy_died(enemy: Enemy)
 signal enemy_spawned(enemy: Enemy)
-signal gain_xp(value: int)
 signal pause_game()
 signal unpause_game()
-signal stats_updated(stats: String)
 
 signal damage_dealt(event: DamageEvent)
 
