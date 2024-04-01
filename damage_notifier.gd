@@ -11,7 +11,9 @@ func popup_damage(event: DamageEvent):
 	d.scale *= event.scale
 
 func _on_signal_bus_damage_dealt(event: DamageEvent):
+	LevelStats.damage_taken += event.damage
 	popup_damage(event)
 
 func _on_player_deal_damage(event):
+	LevelStats.damage_dealt += event.damage
 	popup_damage(event)

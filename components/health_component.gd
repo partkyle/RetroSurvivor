@@ -8,6 +8,7 @@ signal health_updated(current: int, total: int)
 @export var health := max_health
 
 func _ready():
+	max_health = max_health * LevelStats.current_stats.level * 0.1
 	health = max_health
 
 

@@ -42,4 +42,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.31522, 0)
 
 [node name="HealthComponent" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.596, 0)
-max_health = 10
+max_health = 200

@@ -15,3 +15,11 @@ func _on_pause_game():
 
 func _on_unpause_game():
 	get_tree().paused = false
+
+
+func _on_enemy_died(enemy):
+	LevelStats.kills += 1
+
+
+func _on_enemy_spawned(enemy):
+	LevelStats.total += 1

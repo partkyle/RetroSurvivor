@@ -16,4 +16,4 @@ func _on_button_pressed():
 
 func start_new_game():
 	get_tree().paused = false
-	SceneManager.reset_arena()
+	SceneManager.load_new_scene.emit(true)

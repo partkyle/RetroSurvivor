@@ -1,18 +1,30 @@
 extends Node
 
+signal load_new_scene(reset: bool)
+
 var current_scene : Node = null
 
-var arena_scene = "res://arena.tscn"
+var arena_scene = "res://levels/arena.tscn"
 
 func _ready():
 	var root = get_tree().root
 	current_scene = root.get_child(root.get_child_count() - 1)
 
+	load_new_scene.connect(load_handler)
+
+func load_handler(reset: bool):
+	if reset:
+		reset_arena()
+
+	load_arena()
+
 func reset_arena():
+	LevelStats.reset()
 	PlayerStats.reset()
 	goto_scene(arena_scene)
 
 func load_arena():
+	LevelStats.next_level()
 	goto_scene(arena_scene)
 
 # taken from the Godot Documentation

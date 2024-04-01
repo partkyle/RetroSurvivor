@@ -1,28 +1,29 @@
-[gd_scene load_steps=35 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=36 format=3 uid="uid://jcflgwwwn1le"]
 
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_kyse6"]
-[ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="2_5fosw"]
-[ext_resource type="PackedScene" uid="uid://c16fabcn8ptp" path="res://enemies/enemy_spawner_totem.tscn" id="4_1k52j"]
-[ext_resource type="Script" path="res://BossSpawner.gd" id="4_12mjx"]
-[ext_resource type="Script" path="res://xp_spawner.gd" id="5_1pd12"]
-[ext_resource type="PackedScene" uid="uid://cbx8n2n76d1xe" path="res://enemies/boss_enemy.tscn" id="5_x2mpg"]
-[ext_resource type="PackedScene" uid="uid://5vtvxlilkwxa" path="res://xp.tscn" id="6_8fcpg"]
-[ext_resource type="Script" path="res://SignalBus.gd" id="7_salve"]
-[ext_resource type="PackedScene" uid="uid://b2188ornd2ksf" path="res://levels/extranction_portal.tscn" id="8_6eveq"]
-[ext_resource type="Script" path="res://damage_notifier.gd" id="8_kwybg"]
-[ext_resource type="PackedScene" uid="uid://c1j0q4pbd3wsu" path="res://damage_popup.tscn" id="9_svd4l"]
-[ext_resource type="Script" path="res://UI.gd" id="10_npakd"]
-[ext_resource type="PackedScene" uid="uid://becxdpu3rdald" path="res://upgrade_select.tscn" id="11_vkao0"]
-[ext_resource type="Resource" uid="uid://bcg8h5axbiqw" path="res://resources/powerups/move_speed.tres" id="12_5set2"]
-[ext_resource type="Resource" uid="uid://dmticccf3b4mu" path="res://resources/powerups/attack_range.tres" id="13_lj5sq"]
-[ext_resource type="Resource" uid="uid://b8dxnhsqnei88" path="res://resources/powerups/damage.tres" id="14_pei87"]
-[ext_resource type="Resource" uid="uid://drec0q66v6eb7" path="res://resources/powerups/pickup_radius.tres" id="15_xdyh8"]
-[ext_resource type="Script" path="res://game_over.gd" id="16_0dgqe"]
-[ext_resource type="Resource" uid="uid://c72rljnbf3742" path="res://resources/powerups/health_regen.tres" id="16_xf7wi"]
-[ext_resource type="Texture2D" uid="uid://cyqf2lb5ojevj" path="res://assets/ded.png" id="17_1mmgd"]
-[ext_resource type="Resource" uid="uid://b7ro1mtduu8t1" path="res://resources/powerups/attack_speed.tres" id="17_7v7fy"]
-[ext_resource type="Resource" uid="uid://ceciyiosn6j4w" path="res://resources/powerups/vampirism.tres" id="17_q4ppy"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="18_t54sb"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_tu41l"]
+[ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="3_a1jpg"]
+[ext_resource type="PackedScene" uid="uid://c16fabcn8ptp" path="res://enemies/enemy_spawner_totem.tscn" id="4_y2uix"]
+[ext_resource type="Script" path="res://BossSpawner.gd" id="5_wltol"]
+[ext_resource type="PackedScene" uid="uid://cbx8n2n76d1xe" path="res://enemies/boss_enemy.tscn" id="6_vjaj5"]
+[ext_resource type="PackedScene" uid="uid://b2188ornd2ksf" path="res://levels/extranction_portal.tscn" id="7_t04pt"]
+[ext_resource type="Script" path="res://xp_spawner.gd" id="8_fru4h"]
+[ext_resource type="PackedScene" uid="uid://5vtvxlilkwxa" path="res://xp.tscn" id="9_fc4s0"]
+[ext_resource type="Script" path="res://SignalBus.gd" id="10_br0rc"]
+[ext_resource type="Script" path="res://damage_notifier.gd" id="11_dxmhe"]
+[ext_resource type="PackedScene" uid="uid://c1j0q4pbd3wsu" path="res://damage_popup.tscn" id="12_25npy"]
+[ext_resource type="Script" path="res://UI.gd" id="13_g35wm"]
+[ext_resource type="PackedScene" uid="uid://becxdpu3rdald" path="res://upgrade_select.tscn" id="14_pnbqn"]
+[ext_resource type="Resource" uid="uid://bcg8h5axbiqw" path="res://resources/powerups/move_speed.tres" id="15_vape6"]
+[ext_resource type="Resource" uid="uid://dmticccf3b4mu" path="res://resources/powerups/attack_range.tres" id="16_cw718"]
+[ext_resource type="Resource" uid="uid://b8dxnhsqnei88" path="res://resources/powerups/damage.tres" id="17_i5pqr"]
+[ext_resource type="Resource" uid="uid://drec0q66v6eb7" path="res://resources/powerups/pickup_radius.tres" id="18_i66uc"]
+[ext_resource type="Resource" uid="uid://c72rljnbf3742" path="res://resources/powerups/health_regen.tres" id="19_4se33"]
+[ext_resource type="Resource" uid="uid://ceciyiosn6j4w" path="res://resources/powerups/vampirism.tres" id="20_rs20a"]
+[ext_resource type="Resource" uid="uid://b7ro1mtduu8t1" path="res://resources/powerups/attack_speed.tres" id="21_v5w6i"]
+[ext_resource type="Script" path="res://game_over.gd" id="22_v8ttl"]
+[ext_resource type="Texture2D" uid="uid://cyqf2lb5ojevj" path="res://assets/ded.png" id="23_5n4ej"]
+[ext_resource type="Script" path="res://levels/debug.gd" id="24_cmu5b"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="24_r2x1b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ltofi"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -36,6 +37,12 @@ background_mode = 2
 sky = SubResource("Sky_tk6ea")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ije44"]
+size = Vector3(1, 10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgyxo"]
+size = Vector3(1, 10, 10)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ufw0k"]
 
@@ -52,16 +59,10 @@ size = Vector2(100, 100)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v6tgy"]
 data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ije44"]
-size = Vector3(1, 10, 10)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_lgyxo"]
-size = Vector3(1, 10, 10)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riw0p"]
 bg_color = Color(0.0470588, 0.6, 0.839216, 1)
 
-[node name="Main" type="Node3D"]
+[node name="Arena" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_73ap4")
@@ -71,21 +72,9 @@ transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 
 cull_mask = 1048573
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera"]
-script = ExtResource("1_kyse6")
+script = ExtResource("2_tu41l")
 
-[node name="Floor" type="StaticBody3D" parent="."]
-collision_layer = 0
-metadata/_edit_lock_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-layers = 3
-material_override = SubResource("StandardMaterial3D_bnowy")
-mesh = SubResource("PlaneMesh_aeau0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("ConcavePolygonShape3D_v6tgy")
-
-[node name="Player" parent="." instance=ExtResource("2_5fosw")]
+[node name="Player" parent="." instance=ExtResource("3_a1jpg")]
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.565, 0)
@@ -94,28 +83,28 @@ update_scale = false
 
 [node name="EnemyParent" type="Node3D" parent="."]
 
-[node name="EnemySpawnerTotem" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("4_1k52j")]
+[node name="EnemySpawnerTotem" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("4_y2uix")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6492, 0, 0)
 player = NodePath("../Player")
 signal_bus = NodePath("../SignalBus")
 enemy_parent = NodePath("../EnemyParent")
 
-[node name="EnemySpawnerTotem2" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("4_1k52j")]
+[node name="EnemySpawnerTotem2" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("4_y2uix")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.3029)
 player = NodePath("../Player")
 signal_bus = NodePath("../SignalBus")
 enemy_parent = NodePath("../EnemyParent")
 
-[node name="EnemySpawnerTotem3" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("4_1k52j")]
+[node name="EnemySpawnerTotem3" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("4_y2uix")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.4791, 0, -12.915)
 player = NodePath("../Player")
 signal_bus = NodePath("../SignalBus")
 enemy_parent = NodePath("../EnemyParent")
 
 [node name="BossSpawner" type="Node3D" parent="." node_paths=PackedStringArray("signal_bus", "spawn_near_target", "spawn_parent", "watch_list", "player")]
-script = ExtResource("4_12mjx")
-boss = ExtResource("5_x2mpg")
-extraction = ExtResource("8_6eveq")
+script = ExtResource("5_wltol")
+boss = ExtResource("6_vjaj5")
+extraction = ExtResource("7_t04pt")
 signal_bus = NodePath("../SignalBus")
 spawn_near_target = NodePath("../Player")
 spawn_parent = NodePath("../EnemyParent")
@@ -123,8 +112,8 @@ watch_list = [NodePath("../EnemySpawnerTotem"), NodePath("../EnemySpawnerTotem2"
 player = NodePath("../Player")
 
 [node name="XpSpawner" type="Node3D" parent="."]
-script = ExtResource("5_1pd12")
-xp = ExtResource("6_8fcpg")
+script = ExtResource("8_fru4h")
+xp = ExtResource("9_fc4s0")
 
 [node name="Environment" type="Node" parent="."]
 
@@ -158,18 +147,30 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 shape = SubResource("BoxShape3D_lgyxo")
 
+[node name="Floor" type="StaticBody3D" parent="Environment"]
+collision_layer = 0
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Floor"]
+layers = 3
+material_override = SubResource("StandardMaterial3D_bnowy")
+mesh = SubResource("PlaneMesh_aeau0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
+shape = SubResource("ConcavePolygonShape3D_v6tgy")
+
 [node name="SignalBus" type="Node3D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("7_salve")
+script = ExtResource("10_br0rc")
 
 [node name="DamageNotifier" type="Node3D" parent="."]
-script = ExtResource("8_kwybg")
-damage_popup = ExtResource("9_svd4l")
+script = ExtResource("11_dxmhe")
+damage_popup = ExtResource("12_25npy")
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3
 follow_viewport_enabled = true
-script = ExtResource("10_npakd")
+script = ExtResource("13_g35wm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 offset_right = 57.0
@@ -178,18 +179,6 @@ offset_bottom = 104.0
 [node name="Kills" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
 text = "Kills: 0"
-
-[node name="Alive" type="Label" parent="UI/VBoxContainer"]
-layout_mode = 2
-text = "Kills: 0"
-
-[node name="Total" type="Label" parent="UI/VBoxContainer"]
-layout_mode = 2
-text = "Total: 0"
-
-[node name="Xp" type="Label" parent="UI/VBoxContainer"]
-layout_mode = 2
-text = "Total: 0"
 
 [node name="Stats" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
@@ -237,10 +226,10 @@ size_flags_vertical = 1
 theme_override_styles/fill = SubResource("StyleBoxFlat_riw0p")
 show_percentage = false
 
-[node name="UpgradeSelect" parent="UI" instance=ExtResource("11_vkao0")]
+[node name="UpgradeSelect" parent="UI" instance=ExtResource("14_pnbqn")]
 visible = false
 offset_right = -0.00012207
-choices = Array[Resource("res://resources/powerups/powerup.gd")]([ExtResource("12_5set2"), ExtResource("13_lj5sq"), ExtResource("14_pei87"), ExtResource("15_xdyh8"), ExtResource("16_xf7wi"), ExtResource("17_q4ppy"), ExtResource("17_7v7fy")])
+choices = Array[Resource("res://resources/powerups/powerup.gd")]([ExtResource("15_vape6"), ExtResource("16_cw718"), ExtResource("17_i5pqr"), ExtResource("18_i66uc"), ExtResource("19_4se33"), ExtResource("20_rs20a"), ExtResource("21_v5w6i")])
 
 [node name="GameOver" type="ColorRect" parent="UI"]
 visible = false
@@ -250,7 +239,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.156863, 0.156863, 0.156863, 0.682353)
-script = ExtResource("16_0dgqe")
+script = ExtResource("22_v8ttl")
 
 [node name="ded" type="TextureRect" parent="UI/GameOver"]
 layout_mode = 1
@@ -259,7 +248,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("17_1mmgd")
+texture = ExtResource("23_5n4ej")
 
 [node name="Button" type="Button" parent="UI/GameOver"]
 layout_mode = 1
@@ -278,7 +267,7 @@ text = "Restart Game"
 
 [node name="PhantomCamera3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 12, 6)
-script = ExtResource("18_t54sb")
+script = ExtResource("24_r2x1b")
 priority_override = false
 priority = 0
 follow_mode = 2
@@ -314,15 +303,19 @@ projection = 1
 fov = 37.8493
 size = 40.0
 
+[node name="Debug" type="Node3D" parent="." node_paths=PackedStringArray("player", "xpSpawner")]
+script = ExtResource("24_cmu5b")
+player = NodePath("../Player")
+xpSpawner = NodePath("../XpSpawner")
+
 [connection signal="deal_damage" from="Player" to="DamageNotifier" method="_on_player_deal_damage"]
 [connection signal="death" from="Player" to="UI/GameOver" method="_on_player_death"]
 [connection signal="level_up" from="Player" to="UI" method="_on_player_level_up"]
 [connection signal="level_up" from="Player" to="UI/UpgradeSelect" method="_on_player_level_up"]
 [connection signal="damage_dealt" from="SignalBus" to="DamageNotifier" method="_on_signal_bus_damage_dealt"]
 [connection signal="enemy_died" from="SignalBus" to="XpSpawner" method="_on_signal_bus_enemy_died"]
-[connection signal="enemy_died" from="SignalBus" to="UI" method="_on_signal_bus_enemy_died"]
-[connection signal="enemy_spawned" from="SignalBus" to="UI" method="_on_signal_bus_enemy_spawned"]
+[connection signal="enemy_died" from="SignalBus" to="SignalBus" method="_on_enemy_died"]
+[connection signal="enemy_spawned" from="SignalBus" to="SignalBus" method="_on_enemy_spawned"]
 [connection signal="pause_game" from="SignalBus" to="SignalBus" method="_on_pause_game"]
 [connection signal="unpause_game" from="SignalBus" to="SignalBus" method="_on_unpause_game"]
-[connection signal="select_powerup" from="UI/UpgradeSelect" to="Player" method="_on_upgrade_select_select_powerup"]
 [connection signal="pressed" from="UI/GameOver/Button" to="UI/GameOver" method="_on_button_pressed"]

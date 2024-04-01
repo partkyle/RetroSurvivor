@@ -55,25 +55,6 @@ func _on_signal_bus_gain_xp(value):
 func _add_xp(value: int):
 	PlayerStats.add_xp(value)
 
-func _on_upgrade_select_select_powerup(powerup: PowerUp, rarity: PowerUp.Rarity):
-	match powerup.stat:
-		PowerUp.Stat.MOVE_SPEED:
-			PlayerStats.move_speed_buff += powerup.rarity_scaling[rarity]
-		PowerUp.Stat.ATTACK_DAMAGE:
-			PlayerStats.attack_damage_buff += powerup.rarity_scaling[rarity]
-		PowerUp.Stat.ATTACK_RANGE:
-			PlayerStats.attack_range_buff += powerup.rarity_scaling[rarity]
-			attack_aura.size = PlayerStats.calc_attack_range()
-		PowerUp.Stat.PICKUP_RADIUS:
-			PlayerStats.pickup_radius_buff += powerup.rarity_scaling[rarity]
-			pickup_radius = PlayerStats.calc_pickup_radius()
-		PowerUp.Stat.HEALTH_REGEN:
-			PlayerStats.health_regen += powerup.rarity_scaling[rarity]
-		PowerUp.Stat.VAMPIRISM:
-			PlayerStats.vampirism += powerup.rarity_scaling[rarity]
-		PowerUp.Stat.ATTACK_SPEED:
-			PlayerStats.attack_speed += powerup.rarity_scaling[rarity]
-
 func _on_health_component_health_below_zero():
 	death.emit()
 

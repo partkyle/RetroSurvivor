@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://singletons/SceneManager.gd"
 PlayerStats="*res://singletons/player_stats.gd"
+LevelStats="*res://singletons/level_stats.gd"
 
 [display]
 

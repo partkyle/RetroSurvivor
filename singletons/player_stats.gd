@@ -129,3 +129,21 @@ func add_xp(value: int):
 		xp_to_next_level += 50
 		level += 1
 		level_up.emit(level)
+
+
+func select_powerup(powerup: PowerUp, rarity: PowerUp.Rarity):
+	match powerup.stat:
+		PowerUp.Stat.MOVE_SPEED:
+			PlayerStats.move_speed_buff += powerup.rarity_scaling[rarity]
+		PowerUp.Stat.ATTACK_DAMAGE:
+			PlayerStats.attack_damage_buff += powerup.rarity_scaling[rarity]
+		PowerUp.Stat.ATTACK_RANGE:
+			PlayerStats.attack_range_buff += powerup.rarity_scaling[rarity]
+		PowerUp.Stat.PICKUP_RADIUS:
+			PlayerStats.pickup_radius_buff += powerup.rarity_scaling[rarity]
+		PowerUp.Stat.HEALTH_REGEN:
+			PlayerStats.health_regen += powerup.rarity_scaling[rarity]
+		PowerUp.Stat.VAMPIRISM:
+			PlayerStats.vampirism += powerup.rarity_scaling[rarity]
+		PowerUp.Stat.ATTACK_SPEED:
+			PlayerStats.attack_speed += powerup.rarity_scaling[rarity]

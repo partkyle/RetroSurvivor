@@ -21,17 +21,18 @@ func _ready():
 	setup_choices()
 
 	PlayerStats.level_up.connect(_on_player_level_up)
+	select_powerup.connect(PlayerStats.select_powerup)
+
 
 
 var previous_level := 1
 
 func _on_player_level_up(level):
 	if level != previous_level:
+		signal_bus.pause_game.emit()
 		setup_choices()
 		previous_level = level
 		show()
-		signal_bus.pause_game.emit()
-
 
 func setup_choices():
 	for i in ui_choices.size():
