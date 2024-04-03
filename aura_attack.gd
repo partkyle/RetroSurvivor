@@ -28,6 +28,9 @@ func set_size(size: float):
 		mesh.mesh.bottom_radius = size
 		collider.shape.radius = size
 
+func _process(delta):
+	set_size(PlayerStats.calc_attack_range())
+
 func _physics_process(delta):
 	var time_until_next_attack = seconds_per_attack / (1.0 + PlayerStats.attack_speed)
 	time_since_last_attack += delta
