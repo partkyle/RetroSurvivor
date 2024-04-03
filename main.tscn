@@ -1,11 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://denqi4sbg1wb2"]
 
-[sub_resource type="GDScript" id="GDScript_rhat8"]
-script/source = "extends Node3D
-
-func _ready():
-	SceneManager.load_new_scene.emit(true)
-"
+[ext_resource type="Script" path="res://main.gd" id="1_qtlef"]
 
 [node name="MainLoop" type="Node3D"]
-script = SubResource("GDScript_rhat8")
+script = ExtResource("1_qtlef")
