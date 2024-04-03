@@ -15,8 +15,8 @@ func _ready():
 func load_handler(reset: bool):
 	if reset:
 		reset_arena()
-
-	load_arena()
+	else:
+		load_arena()
 
 func reset_arena():
 	LevelStats.reset()
@@ -38,18 +38,21 @@ func goto_scene(path):
 	# The solution is to defer the load to a later time, when
 	# we can be sure that no code from the current scene is running:
 
-	call_deferred("_deferred_goto_scene", path)
+	preload_scene(arena_scene)
+	call_deferred("_deferred_goto_scene")
 
 
-func _deferred_goto_scene(path):
+var preloaded_scene : Resource = null
+func preload_scene(path):
+	preloaded_scene = ResourceLoader.load(path)
+
+
+func _deferred_goto_scene():
 	# It is now safe to remove the current scene.
 	current_scene.free()
 
-	# Load the new scene.
-	var s = ResourceLoader.load(path)
-
 	# Instance the new scene.
-	current_scene = s.instantiate()
+	current_scene = preloaded_scene.instantiate()
 
 	# Add it to the active scene, as child of root.
 	get_tree().root.add_child(current_scene)
