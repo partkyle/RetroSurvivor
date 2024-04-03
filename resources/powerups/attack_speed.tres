@@ -13,9 +13,9 @@ name = "Attack Speed"
 stat = 1
 description = "Increase attack speed by %d%%"
 rarity_scaling = {
-0: 1.0,
-1: 1.5,
-2: 2.0,
-3: 5.0
+0: 0.1,
+1: 0.25,
+2: 0.5,
+3: 1.0
 }
 icon = SubResource("AtlasTexture_nbug6")
