@@ -18,18 +18,18 @@ func spawn_boss():
 		return
 
 	var e := boss.instantiate()
-	e.global_position = spawn_near_target.global_position + Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)) * 10.0
 	e.target = player
 	e.set_signal_bus(signal_bus)
 	e.connect('death', spawn_extraction)
 	spawn_parent.add_child(e)
+	e.global_position = spawn_near_target.global_position + Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)) * 10.0
 	signal_bus.enemy_spawned.emit(e)
 	boss_spawned = true
 
 func spawn_extraction(_enemy: Enemy):
 	var e := extraction.instantiate()
 	extraction_parent.add_child(e)
-	e.global_position = Vector3(0.0, 0.01, 0.0)
+	e.global_position = Vector3.ZERO
 
 
 func _ready():
