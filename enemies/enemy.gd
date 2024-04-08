@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 signal death(enemy: Enemy)
 
-const SPEED := 2.0
+const SPEED := 3.0
 const EPISLON := 0.1
 
 @onready var damage_notifier_position := $DamageNotifierPosition
@@ -15,6 +15,8 @@ const EPISLON := 0.1
 @onready var health_component : HealthComponent = $HealthComponent
 
 var target : Node3D
+var desired_velocity: Vector3
+@export var acceleration := 5.0
 
 var signal_bus : SignalBus
 
@@ -25,13 +27,16 @@ var signal_bus : SignalBus
 
 func _physics_process(delta):
 	if target:
-		look_at(target.global_position)
 		var direction := target.global_position - global_position
 		if direction.length() > EPISLON:
-			velocity = Vector3(direction.x, 0.0, direction.z).normalized() * SPEED * LevelStats.current_stats.level * 0.1
+			desired_velocity = Vector3(direction.x, 0.0, direction.z).normalized() * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, SPEED)
-		velocity.y = move_toward(velocity.y, 0.0, SPEED)
+		desired_velocity = Vector3.ZERO
+
+	velocity = velocity.move_toward(desired_velocity, acceleration * delta)
+
+	if velocity:
+		look_at(global_position + velocity)
 
 	move_and_slide()
 
