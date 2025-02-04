@@ -108,8 +108,8 @@ environment = SubResource("Environment_73ap4")
 [node name="Player" parent="." instance=ExtResource("3_a1jpg")]
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.565, 0)
-remote_path = NodePath("../../Minimap/SubViewportContainer/SubViewport/Camera3D")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12, 0)
+remote_path = NodePath("../../Minimap/Outline/SubViewportContainer/SubViewport/MinimapCamera")
 update_rotation = false
 update_scale = false
 
@@ -296,25 +296,40 @@ text = "Restart Game"
 
 [node name="Minimap" type="CanvasLayer" parent="."]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Minimap"]
+[node name="Outline" type="ColorRect" parent="Minimap"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -256.0
-offset_bottom = 256.0
+offset_left = -275.0
+offset_bottom = 275.0
 grow_horizontal = 0
+color = Color(0.116127, 0.116127, 0.116127, 1)
 
-[node name="SubViewport" type="SubViewport" parent="Minimap/SubViewportContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Minimap/Outline"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Minimap/Outline/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(256, 256)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="Minimap/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.565, 0)
+[node name="MinimapCamera" type="Camera3D" parent="Minimap/Outline/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12, 0)
 cull_mask = 2
 projection = 1
 fov = 37.8493
-size = 40.0
+size = 10.0
 
 [node name="Debug" type="Node3D" parent="." node_paths=PackedStringArray("player", "xpSpawner")]
 script = ExtResource("24_cmu5b")
