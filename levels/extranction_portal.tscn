@@ -22,9 +22,12 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_3sr52")
 
 [sub_resource type="QuadMesh" id="QuadMesh_b87yn"]
 material = SubResource("ShaderMaterial_ojy8l")
+size = Vector2(10, 10)
 orientation = 1
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f21po"]
+height = 10.0
+radius = 5.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yh2np"]
 atlas = ExtResource("3_eosgo")
@@ -33,17 +36,13 @@ region = Rect2(0, 0, 32, 32)
 [node name="ExtranctionPortal" type="Node3D"]
 script = ExtResource("1_kbc74")
 
-[node name="Scaler" type="Node3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scaler"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 mesh = SubResource("QuadMesh_b87yn")
-skeleton = NodePath("../..")
 
-[node name="Area3D" type="Area3D" parent="Scaler"]
+[node name="Area3D" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Scaler/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CylinderShape3D_f21po")
 
 [node name="MinimapSprite" type="Sprite3D" parent="."]
@@ -55,4 +54,4 @@ pixel_size = 0.5
 billboard = 1
 texture = SubResource("AtlasTexture_yh2np")
 
-[connection signal="body_entered" from="Scaler/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
