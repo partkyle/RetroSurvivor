@@ -7,17 +7,20 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_p7a2c"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3sr52"]
+seamless = true
 noise = SubResource("FastNoiseLite_p7a2c")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ojy8l"]
 render_priority = 0
 shader = ExtResource("1_eunsp")
-shader_parameter/color = Color(0.351302, 0.297218, 0.750267, 1)
+shader_parameter/color = Color(0.352941, 1, 0.74902, 1)
 shader_parameter/ring_width = 0.02
 shader_parameter/time_scale = 5.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_3sr52")
 
 [sub_resource type="QuadMesh" id="QuadMesh_b87yn"]
+material = SubResource("ShaderMaterial_ojy8l")
+orientation = 1
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f21po"]
 
@@ -32,8 +35,7 @@ script = ExtResource("1_kbc74")
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Scaler"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.01, 0)
-material_override = SubResource("ShaderMaterial_ojy8l")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 mesh = SubResource("QuadMesh_b87yn")
 skeleton = NodePath("../..")
 
@@ -44,6 +46,7 @@ shape = SubResource("CylinderShape3D_f21po")
 
 [node name="MinimapSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+visible = false
 layers = 2
 modulate = Color(0, 0, 1, 1)
 pixel_size = 0.5

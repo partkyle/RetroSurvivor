@@ -35,6 +35,7 @@ atlas = ExtResource("7_2abev")
 region = Rect2(0, 0, 32, 32)
 
 [node name="EnemySpawnerTotem" type="CharacterBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_avg3v")
@@ -52,6 +53,7 @@ shape = SubResource("SphereShape3D_l83ja")
 script = ExtResource("3_4fjf6")
 enemies = Array[PackedScene]([ExtResource("4_js3j4"), ExtResource("5_2iggc")])
 spawn_radius = Vector2(0, 10)
+max_count = 225
 spawn_point = NodePath("..")
 
 [node name="HealthComponent" type="Node3D" parent="."]

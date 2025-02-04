@@ -76,3 +76,8 @@ func _on_heal_per_second_timer_timeout():
 		var amount = health_component.heal(PlayerStats.health_regen)
 		if amount:
 			deal_damage.emit(DamageEvent.create(amount, health_component.global_position, Color.GREEN, 1.2))
+
+
+func _on_hurt_box_body_entered(body: Node3D) -> void:
+	if body is Enemy:
+		health_component.take_damage(body.damage)

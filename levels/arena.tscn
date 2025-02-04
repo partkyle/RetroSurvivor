@@ -1,17 +1,19 @@
-[gd_scene load_steps=36 format=3 uid="uid://jcflgwwwn1le"]
+[gd_scene load_steps=37 format=3 uid="uid://jcflgwwwn1le"]
 
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_tu41l"]
+[ext_resource type="Shader" path="res://levels/toon.gdshader" id="2_esjey"]
 [ext_resource type="PackedScene" uid="uid://p0nwwoiajish" path="res://player.tscn" id="3_a1jpg"]
-[ext_resource type="PackedScene" uid="uid://c16fabcn8ptp" path="res://enemies/enemy_spawner_totem.tscn" id="4_y2uix"]
 [ext_resource type="Script" path="res://BossSpawner.gd" id="5_wltol"]
-[ext_resource type="PackedScene" uid="uid://cbx8n2n76d1xe" path="res://enemies/boss_enemy.tscn" id="6_vjaj5"]
-[ext_resource type="PackedScene" uid="uid://b2188ornd2ksf" path="res://levels/extranction_portal.tscn" id="7_t04pt"]
+[ext_resource type="Script" path="res://environment/environment.gd" id="6_uxbw1"]
+[ext_resource type="Shader" path="res://levels/floor.gdshader" id="7_osvsr"]
 [ext_resource type="Script" path="res://xp_spawner.gd" id="8_fru4h"]
+[ext_resource type="Shader" path="res://levels/sepia.gdshader" id="9_1bl6e"]
 [ext_resource type="PackedScene" uid="uid://5vtvxlilkwxa" path="res://xp.tscn" id="9_fc4s0"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="10_br0rc"]
+[ext_resource type="Shader" path="res://levels/palette.gdshader" id="10_f2p3c"]
 [ext_resource type="Script" path="res://damage_notifier.gd" id="11_dxmhe"]
 [ext_resource type="PackedScene" uid="uid://c1j0q4pbd3wsu" path="res://damage_popup.tscn" id="12_25npy"]
 [ext_resource type="Script" path="res://UI.gd" id="13_g35wm"]
+[ext_resource type="Script" path="res://resources/powerups/powerup.gd" id="14_k3ow0"]
 [ext_resource type="PackedScene" uid="uid://becxdpu3rdald" path="res://upgrade_select.tscn" id="14_pnbqn"]
 [ext_resource type="Resource" uid="uid://bcg8h5axbiqw" path="res://resources/powerups/move_speed.tres" id="15_vape6"]
 [ext_resource type="Resource" uid="uid://dmticccf3b4mu" path="res://resources/powerups/attack_range.tres" id="16_cw718"]
@@ -23,7 +25,6 @@
 [ext_resource type="Script" path="res://game_over.gd" id="22_v8ttl"]
 [ext_resource type="Texture2D" uid="uid://cyqf2lb5ojevj" path="res://assets/ded.png" id="23_5n4ej"]
 [ext_resource type="Script" path="res://levels/debug.gd" id="24_cmu5b"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="24_r2x1b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ltofi"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,26 +39,63 @@ sky = SubResource("Sky_tk6ea")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxMesh" id="BoxMesh_ije44"]
-size = Vector3(1, 10, 10)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjp10"]
+render_priority = 0
+shader = ExtResource("2_esjey")
+shader_parameter/outlineColor = Color(0, 0, 0, 0.78)
+shader_parameter/depth_threshold = 0.025
+shader_parameter/normal_threshold = 0.5
+shader_parameter/normal_smoothing = 0.25
+shader_parameter/max_thickness = 1.3
+shader_parameter/min_thickness = 0.5
+shader_parameter/max_distance = 75.0
+shader_parameter/min_distance = 2.0
+shader_parameter/grazing_fresnel_power = 5.0
+shader_parameter/grazing_angle_mask_power = 1.0
+shader_parameter/grazing_angle_modulation_factor = 50.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_lgyxo"]
-size = Vector3(1, 10, 10)
+[sub_resource type="QuadMesh" id="QuadMesh_obw3w"]
+material = SubResource("ShaderMaterial_hjp10")
+flip_faces = true
+size = Vector2(2, 2)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ufw0k"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_glq8m"]
-noise = SubResource("FastNoiseLite_ufw0k")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnowy"]
-albedo_color = Color(0.219608, 0.219608, 0.219608, 1)
-albedo_texture = SubResource("NoiseTexture2D_glq8m")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7up7"]
+render_priority = 0
+shader = ExtResource("7_osvsr")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_aeau0"]
+material = SubResource("ShaderMaterial_u7up7")
 size = Vector2(100, 100)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v6tgy"]
 data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3fbo"]
+shader = ExtResource("9_1bl6e")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_li8hs"]
+shader = ExtResource("10_f2p3c")
+shader_parameter/palette = PackedColorArray(0, 0, 0, 1, 0, 0.470588, 0, 1, 0, 0.894118, 0, 1, 0.670588, 1, 0, 1, 0.984314, 1, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riw0p"]
 bg_color = Color(0.0470588, 0.6, 0.839216, 1)
@@ -67,48 +105,30 @@ bg_color = Color(0.0470588, 0.6, 0.839216, 1)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_73ap4")
 
-[node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 12, 6)
-cull_mask = 1048573
-
-[node name="PhantomCameraHost" type="Node" parent="MainCamera"]
-script = ExtResource("2_tu41l")
-
 [node name="Player" parent="." instance=ExtResource("3_a1jpg")]
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15.565, 0)
 remote_path = NodePath("../../Minimap/SubViewportContainer/SubViewport/Camera3D")
+update_rotation = false
 update_scale = false
+
+[node name="MainCamera" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 20)
+cull_mask = 1048573
+doppler_tracking = 2
+fov = 37.8493
+
+[node name="PostProcess" type="MeshInstance3D" parent="Player/MainCamera"]
+mesh = SubResource("QuadMesh_obw3w")
 
 [node name="EnemyParent" type="Node3D" parent="."]
 
-[node name="EnemySpawnerTotem" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("4_y2uix")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.6492, 0, 0)
-player = NodePath("../Player")
-signal_bus = NodePath("../SignalBus")
-enemy_parent = NodePath("../EnemyParent")
-
-[node name="EnemySpawnerTotem2" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("4_y2uix")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.3029)
-player = NodePath("../Player")
-signal_bus = NodePath("../SignalBus")
-enemy_parent = NodePath("../EnemyParent")
-
-[node name="EnemySpawnerTotem3" parent="." node_paths=PackedStringArray("player", "signal_bus", "enemy_parent") instance=ExtResource("4_y2uix")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.4791, 0, -12.915)
-player = NodePath("../Player")
-signal_bus = NodePath("../SignalBus")
-enemy_parent = NodePath("../EnemyParent")
-
-[node name="BossSpawner" type="Node3D" parent="." node_paths=PackedStringArray("signal_bus", "spawn_near_target", "spawn_parent", "watch_list", "player")]
+[node name="BossSpawner" type="Node3D" parent="." node_paths=PackedStringArray("signal_bus", "spawn_near_target", "spawn_parent", "player")]
 script = ExtResource("5_wltol")
-boss = ExtResource("6_vjaj5")
-extraction = ExtResource("7_t04pt")
 signal_bus = NodePath("../SignalBus")
 spawn_near_target = NodePath("../Player")
 spawn_parent = NodePath("../EnemyParent")
-watch_list = [NodePath("../EnemySpawnerTotem"), NodePath("../EnemySpawnerTotem2"), NodePath("../EnemySpawnerTotem3")]
 player = NodePath("../Player")
 
 [node name="XpSpawner" type="Node3D" parent="."]
@@ -116,36 +136,7 @@ script = ExtResource("8_fru4h")
 xp = ExtResource("9_fc4s0")
 
 [node name="Environment" type="Node" parent="."]
-
-[node name="Wall" type="StaticBody3D" parent="Environment"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
-collision_layer = 12
-collision_mask = 12
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-layers = 3
-mesh = SubResource("BoxMesh_ije44")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-shape = SubResource("BoxShape3D_lgyxo")
-
-[node name="Wall2" type="StaticBody3D" parent="Environment"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0, 0)
-collision_layer = 12
-collision_mask = 12
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Wall2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-layers = 3
-mesh = SubResource("BoxMesh_ije44")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Wall2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
-shape = SubResource("BoxShape3D_lgyxo")
+script = ExtResource("6_uxbw1")
 
 [node name="Floor" type="StaticBody3D" parent="Environment"]
 collision_layer = 0
@@ -153,7 +144,6 @@ metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Floor"]
 layers = 3
-material_override = SubResource("StandardMaterial3D_bnowy")
 mesh = SubResource("PlaneMesh_aeau0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor"]
@@ -166,6 +156,45 @@ script = ExtResource("10_br0rc")
 [node name="DamageNotifier" type="Node3D" parent="."]
 script = ExtResource("11_dxmhe")
 damage_popup = ExtResource("12_25npy")
+
+[node name="Sepia" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Sepia"]
+material = SubResource("ShaderMaterial_w3fbo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="BlackAndWhite" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="BlackAndWhite"]
+material = SubResource("ShaderMaterial_li8hs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Palette" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Palette"]
+material = SubResource("ShaderMaterial_li8hs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -229,7 +258,7 @@ show_percentage = false
 [node name="UpgradeSelect" parent="UI" instance=ExtResource("14_pnbqn")]
 visible = false
 offset_right = -0.00012207
-choices = Array[Resource("res://resources/powerups/powerup.gd")]([ExtResource("15_vape6"), ExtResource("16_cw718"), ExtResource("17_i5pqr"), ExtResource("18_i66uc"), ExtResource("19_4se33"), ExtResource("20_rs20a"), ExtResource("21_v5w6i")])
+choices = Array[ExtResource("14_k3ow0")]([ExtResource("15_vape6"), ExtResource("16_cw718"), ExtResource("17_i5pqr"), ExtResource("18_i66uc"), ExtResource("19_4se33"), ExtResource("20_rs20a"), ExtResource("21_v5w6i")])
 
 [node name="GameOver" type="ColorRect" parent="UI"]
 visible = false
@@ -238,7 +267,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.156863, 0.156863, 0.156863, 0.682353)
+color = Color(0.156863, 0.156863, 0.156863, 0.866667)
 script = ExtResource("22_v8ttl")
 
 [node name="ded" type="TextureRect" parent="UI/GameOver"]
@@ -264,22 +293,6 @@ offset_bottom = -117.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Restart Game"
-
-[node name="PhantomCamera3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 12, 6)
-script = ExtResource("24_r2x1b")
-priority_override = false
-priority = 0
-follow_mode = 2
-follow_target = NodePath("../Player")
-follow_parameters/target_offset = Vector3(0, 12, 6)
-follow_parameters/damping = true
-follow_parameters/damping_value = 5.0
-look_at_mode = 0
-tween_parameters = null
-tween_on_load = false
-inactive_update_mode = 0
-camera_3D_resource = null
 
 [node name="Minimap" type="CanvasLayer" parent="."]
 

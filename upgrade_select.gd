@@ -6,13 +6,12 @@ signal select_powerup(powerup: PowerUp, rarity: PowerUp.Rarity)
 @onready var signal_bus := %SignalBus
 
 @onready var ui_choices : Array[Choice] = [
-	$MarginContainer/HBoxContainer/Choice1,
-	$MarginContainer/HBoxContainer/Choice2,
-	$MarginContainer/HBoxContainer/Choice3,
+	%Choice1,
+	%Choice2,
+	%Choice3,
 ]
 
 @export var choices : Array[PowerUp]
-
 
 func _ready():
 	# set up a reference to this parent so we can send signals back
@@ -33,6 +32,9 @@ func _on_player_level_up(level):
 		setup_choices()
 		previous_level = level
 		show()
+
+		if Settings.auto_level:
+			ui_choices[0]._control_parent.emit_signal('select_powerup', ui_choices[0]._powerup, ui_choices[0]._rarity)
 
 func setup_choices():
 	for i in ui_choices.size():
@@ -59,3 +61,7 @@ func random_rarity() -> PowerUp.Rarity:
 func _on_select_powerup(powerup, rarity):
 	hide()
 	signal_bus.unpause_game.emit()
+
+
+func _on_auto_level_check_box_toggled(toggled_on: bool) -> void:
+	Settings.auto_level = toggled_on

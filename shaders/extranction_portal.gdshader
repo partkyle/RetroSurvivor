@@ -14,12 +14,15 @@ void fragment() {
 	vec2 center = vec2(0.5);
 	float dist = distance(UV, center);
 	float ring = dist / ring_width + TIME * time_scale;
+	float ring_alpha = step(1.0, sin(ring) * 0.5 + 1.0);
 
-	vec3 final_ring_color = (1.0 - vec3(sin(ring))) * color * texture(noise_texture, UV + TIME * 0.15).rgb;
+	vec3 final_ring_color = color * texture(noise_texture, UV + TIME * 0.15).r;
+	final_ring_color.b *= 100.0;
+	final_ring_color.g *= 100.0;
+
 	ALBEDO = final_ring_color;
-	//ALPHA = (1.0 - step(1.0 - circle(UV - center, 0.5), 1.0)) * (step(1.0 - final_ring_color.r, 1.0));
-	ALPHA = (1.0 - step(1.0 - circle(UV - center, 0.5), 1.0)) * ring;
 
+	ALPHA = (1.0 - step(0.5, dist)) * ring_alpha;
 }
 
 void light() {}

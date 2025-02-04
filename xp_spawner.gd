@@ -15,7 +15,10 @@ func _on_signal_bus_enemy_died(enemy: Enemy):
 
 func spawn_xp_at_position(pos: Vector3):
 	var e = xp.instantiate()
-	e.global_position = pos
 	e.signal_bus = signal_bus
-	e.value = e.value
+	e.value = e.value * LevelStats.current_stats.level
+	if PlayerStats.stats.level < LevelStats.current_stats.level:
+		e.value *= LevelStats.current_stats.level
+	PlayerStats.add_xp(e.value)
 	xp_root.add_child(e)
+	e.global_position = pos

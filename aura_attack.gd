@@ -50,4 +50,3 @@ func attack():
 
 func calc_damage() -> float:
 	return damage * (1.0 + PlayerStats.attack_damage_buff)
-

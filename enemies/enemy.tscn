@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://catxiq3pmdnu3"]
+[gd_scene load_steps=9 format=3 uid="uid://catxiq3pmdnu3"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_bhbjt"]
 [ext_resource type="Material" uid="uid://dsqbuxvv5ubi5" path="res://shaders/enemy_shader.tres" id="2_uqukl"]
@@ -10,15 +10,13 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d5r3c"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gb81q"]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_8x0jn"]
 atlas = ExtResource("5_jsqim")
 region = Rect2(0, 0, 32, 32)
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 6
-collision_mask = 6
+collision_mask = 4
 script = ExtResource("1_bhbjt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -32,17 +30,11 @@ shape = SubResource("BoxShape3D_d5r3c")
 
 [node name="HealthBar" parent="." instance=ExtResource("3_ysopg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+visible = false
 
 [node name="HealthComponent" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42192, 0)
 script = ExtResource("4_ck280")
-
-[node name="PlayerColliderArea3D" type="Area3D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerColliderArea3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-shape = SubResource("BoxShape3D_gb81q")
 
 [node name="MinimapSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
@@ -53,4 +45,3 @@ texture = SubResource("AtlasTexture_8x0jn")
 
 [connection signal="health_below_zero" from="HealthComponent" to="." method="_on_health_component_health_below_zero"]
 [connection signal="health_updated" from="HealthComponent" to="." method="_on_health_component_health_updated"]
-[connection signal="body_entered" from="PlayerColliderArea3D" to="." method="_on_area_3d_body_entered"]

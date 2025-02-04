@@ -1,8 +1,22 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://dsqbuxvv5ubi5"]
+[gd_resource type="ShaderMaterial" load_steps=7 format=3 uid="uid://dsqbuxvv5ubi5"]
 
 [ext_resource type="Shader" path="res://shaders/enemy.gdshader" id="1_6i3it"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e5yvx"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jxw7n"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7angs"]
+noise = SubResource("FastNoiseLite_jxw7n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icc1x"]
+cull_mode = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+heightmap_enabled = true
+heightmap_scale = -4.575
+heightmap_texture = SubResource("NoiseTexture2D_7angs")
+grow = true
+grow_amount = 0.352
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tc0cw"]
 
@@ -12,14 +26,14 @@ noise = SubResource("FastNoiseLite_tc0cw")
 [resource]
 resource_local_to_scene = true
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_e5yvx")
+next_pass = SubResource("StandardMaterial3D_icc1x")
 shader = ExtResource("1_6i3it")
 shader_parameter/start_color = Color(0.729412, 0.32549, 0.333333, 1)
 shader_parameter/end_color = Color(1, 0, 0, 1)
 shader_parameter/mix_amount = 0.0
 shader_parameter/flash = 0
 shader_parameter/flash_time_scale = 40.0
-shader_parameter/dissolve_height = 1.0
+shader_parameter/dissolve_height = 0.65
 shader_parameter/noise_scale = 0.5
 shader_parameter/time_scale = 0.0
 shader_parameter/glow_color = Color(100, 0, 100, 1)

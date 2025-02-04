@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://p0nwwoiajish"]
+[gd_scene load_steps=19 format=3 uid="uid://p0nwwoiajish"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_j4niv"]
 [ext_resource type="Shader" path="res://shaders/player.gdshader" id="2_2ginq"]
@@ -60,6 +60,8 @@ radius = 5.0
 atlas = ExtResource("7_wshaj")
 region = Rect2(0, 0, 32, 32)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghk3j"]
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 9
 collision_mask = 9
@@ -71,7 +73,7 @@ material_override = SubResource("ShaderMaterial_e1ldo")
 mesh = SubResource("CapsuleMesh_ga450")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000808001, 1, -0.00720555)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_0wjxs")
 
 [node name="Attacks" type="Node3D" parent="."]
@@ -121,8 +123,17 @@ modulate = Color(0, 1, 1, 1)
 billboard = 1
 texture = SubResource("AtlasTexture_rkum1")
 
+[node name="HurtBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ghk3j")
+
 [connection signal="deal_damage" from="Attacks/Aura" to="." method="_on_aura_deal_damage"]
 [connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]
 [connection signal="health_below_zero" from="HealthComponent" to="." method="_on_health_component_health_below_zero"]
 [connection signal="health_updated" from="HealthComponent" to="." method="_on_health_component_health_updated"]
 [connection signal="timeout" from="HealPerSecondTimer" to="." method="_on_heal_per_second_timer_timeout"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

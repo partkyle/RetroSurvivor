@@ -57,13 +57,13 @@ func stats_text():
 	]
 
 func total_damage_dealt():
-	var total = damage_dealt
+	var total_damage = damage_dealt
 	for s in stats_log:
-		total += s.damage_dealt
-	return total
+		total_damage += s.damage_dealt
+	return total_damage
 
 func total_damage_taken():
-	var total = damage_taken
+	var total_damage = damage_taken
 	for s in stats_log:
-		total += s.damage_taken
-	return total
+		total_damage += s.damage_taken
+	return total_damage

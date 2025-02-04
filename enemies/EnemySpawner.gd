@@ -3,7 +3,7 @@ extends Node3D
 
 @export var enemies : Array[PackedScene]
 @export var spawn_radius := Vector2(4, 10)
-@export var max_count := 25
+@export var max_count := 75
 @export var spawn_point : Node3D = self
 @export var enemy_parent : Node3D = self
 
@@ -19,7 +19,7 @@ func spawn_enemy():
 	if total <= max_count:
 		total += 1
 		var new_enemy = enemies.pick_random().instantiate()
-		new_enemy.transform.origin = spawn_point.transform.origin + random_direction() * randf_range(spawn_radius.x, spawn_radius.y)
+		new_enemy.transform.origin = spawn_point.transform.origin + Util.random_direction() * randf_range(spawn_radius.x, spawn_radius.y)
 		enemy_parent.add_child(new_enemy)
 		signal_bus.enemy_spawned.emit(new_enemy)
 		new_enemy.set_signal_bus(signal_bus)
@@ -36,9 +36,6 @@ func _process(delta: float):
 		time_since_last_spawn -= seconds_per_enemy
 		if total < max_count:
 			spawn_enemy()
-
-func random_direction() -> Vector3:
-	return Vector3(randf_range(-1.0, 1.0), 0.0, randf_range(-1.0, 1.0)).normalized()
 
 func _on_enemy_death(enemy: Enemy):
 	total -= 1
