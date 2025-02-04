@@ -10,13 +10,16 @@ float circle(vec2 samplePosition, float radius) {
     return length(samplePosition) - radius;
 }
 
+
 void fragment() {
+	float noise = texture(noise_texture, UV).r;
+
 	vec2 center = vec2(0.5);
 	float dist = distance(UV, center);
 	float ring = dist / ring_width + TIME * time_scale;
-	float ring_alpha = step(1.0, sin(ring) * 0.5 + 1.0);
+	float ring_alpha = step(1.0, sin(ring + noise) * 0.5 + 1.0) ;
 
-	vec3 final_ring_color = color * texture(noise_texture, UV + TIME * 0.15).r;
+	vec3 final_ring_color = color;
 	final_ring_color.b *= 100.0;
 	final_ring_color.g *= 100.0;
 
